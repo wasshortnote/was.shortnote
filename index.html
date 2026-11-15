@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- โหลด PDF.js สำหรับแสดงผลไฟล์ PDF แบบคมชัด -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
         :root {
             --bg-main: #FFFFFF;
@@ -111,7 +113,7 @@
 
         /* Catalog Section */
         .catalog-wrap {
-            max-width: 960px;
+            max-width: 860px;
             margin: 0 auto;
             padding: 36px 5% 60px;
         }
@@ -134,116 +136,123 @@
             letter-spacing: 0.2px;
         }
 
-        /* Product Grid */
+        /* Product Grid (การ์ดมินิมอลไร้ภาพปก) */
         .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
         }
 
         .product-card {
             background-color: var(--bg-main);
             border: 1px solid var(--border-soft);
+            border-left: 5px solid var(--accent-rose);
             border-radius: 14px;
-            overflow: hidden;
+            padding: 22px 24px;
             cursor: pointer;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(158, 138, 132, 0.14);
-            border-color: var(--accent-rose);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 26px rgba(158, 138, 132, 0.14);
+            border-color: var(--accent-deep);
         }
 
-        /* ภาพปกแนวตั้ง 3:4 */
-        .cover-frame {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            background-color: var(--bg-blush);
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-soft);
+        .card-main-info {
+            flex: 1;
+            min-width: 240px;
         }
 
-        .cover-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.35s ease;
-        }
-
-        .product-card:hover .cover-frame img {
-            transform: scale(1.03);
-        }
-
-        .top-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background-color: var(--tag-bundle);
-            color: var(--tag-bundle-text);
-            border: 1px solid #F0DFC0;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        .card-content {
-            padding: 18px 20px 20px;
+        .card-top-meta {
             display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
         }
 
         .subject-en {
-            font-size: 0.76rem;
+            font-size: 0.78rem;
             color: var(--text-taupe);
             letter-spacing: 0.3px;
-            margin-bottom: 2px;
+        }
+
+        .page-badge {
+            background-color: var(--tag-bundle);
+            color: var(--tag-bundle-text);
+            border: 1px solid #F0DFC0;
+            font-size: 0.73rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 20px;
         }
 
         .subject-th {
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: var(--text-ink);
             margin-bottom: 4px;
         }
 
         .subject-prof {
-            font-size: 0.8rem;
+            font-size: 0.83rem;
             color: var(--accent-deep);
-            margin-bottom: 14px;
         }
 
-        .price-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        .card-right-action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            min-width: 210px;
+        }
+
+        .price-pills-row {
+            display: flex;
             gap: 8px;
-            margin-top: auto;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .price-box {
             background-color: var(--bg-cream);
             border: 1px solid var(--border-soft);
             border-radius: 8px;
-            padding: 7px 12px;
+            padding: 6px 12px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-size: 0.83rem;
+            gap: 8px;
+            font-size: 0.84rem;
         }
 
-        .price-box span:first-child {
+        .price-box span {
             color: var(--text-taupe);
         }
 
         .price-box strong {
             color: var(--text-ink);
             font-weight: 600;
+        }
+
+        .preview-link-pill {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent-deep);
+            background-color: var(--bg-blush);
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .product-card:hover .preview-link-pill {
+            background-color: var(--accent-rose);
+            color: #FFFFFF;
         }
 
         /* How to Order & QR Section */
@@ -408,7 +417,7 @@
             flex-grow: 1;
         }
 
-        /* แถบสลับดูภาพตัวอย่าง Midterm / Final */
+        /* แถบสลับดูตัวอย่าง Midterm / Final */
         .sample-tabs {
             display: flex;
             justify-content: center;
@@ -435,11 +444,11 @@
             border-color: var(--accent-rose);
         }
 
-        /* ส่วนแสดงภาพตัวอย่างชีทแนวตั้ง */
+        /* ส่วนแสดงตัวอย่างหน้าชีท PDF/ภาพ แนวตั้ง */
         .vertical-preview-zone {
             position: relative;
             background-color: var(--bg-cream);
-            padding: 16px 16px 16px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -448,35 +457,53 @@
 
         .img-viewport {
             width: 100%;
-            max-height: 54vh;
+            max-height: 55vh;
             overflow: auto;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             border-radius: 8px;
+            position: relative;
+            min-height: 260px;
         }
 
-        .vertical-sample-img {
+        .vertical-sample-media {
             width: auto;
             max-width: 100%;
-            max-height: 52vh;
+            max-height: 53vh;
             object-fit: contain;
             background: white;
             border-radius: 8px;
             box-shadow: 0 6px 20px rgba(44, 40, 39, 0.1);
             cursor: zoom-in;
-            image-rendering: -webkit-optimize-contrast;
+            display: block;
         }
 
         .img-viewport.is-zoomed {
             justify-content: flex-start;
         }
 
-        .img-viewport.is-zoomed .vertical-sample-img {
+        .img-viewport.is-zoomed .vertical-sample-media {
             max-width: none;
             max-height: none;
-            width: 180%;
+            width: 185%;
+            height: auto;
             cursor: zoom-out;
+        }
+
+        .pdf-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.85rem;
+            color: var(--text-taupe);
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            display: none;
+            z-index: 3;
         }
 
         .slide-nav-btn {
@@ -687,12 +714,20 @@
         }
 
         @media (max-width: 640px) {
-            .product-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
             .hero h1 {
                 font-size: 2.1rem;
+            }
+            .product-card {
+                padding: 18px 20px;
+            }
+            .card-right-action {
+                width: 100%;
+                align-items: flex-start;
+                border-top: 1px dashed var(--border-soft);
+                padding-top: 12px;
+            }
+            .price-pills-row {
+                justify-content: flex-start;
             }
             .order-card {
                 justify-content: center;
@@ -718,7 +753,6 @@
     </section>
 
     <main class="catalog-wrap">
-        <!-- ป้ายเน้นข้อความ -->
         <div class="grade-a-banner">
             <strong>🏆 สรุปจากคนที่ได้ A ทุกวิชา ⬇️</strong>
         </div>
@@ -766,14 +800,16 @@
             </div>
 
             <div class="modal-scroll-body">
-                <!-- แถบสลับดูรูปตัวอย่าง Midterm / Final -->
+                <!-- แถบสลับดูตัวอย่าง Midterm / Final -->
                 <div class="sample-tabs" id="sampleTabs"></div>
 
-                <!-- ภาพตัวอย่างแนวตั้ง -->
+                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน) -->
                 <div class="vertical-preview-zone">
                     <button class="slide-nav-btn slide-prev" id="prevBtn" onclick="changePage(-1)">‹</button>
                     <div class="img-viewport" id="imgViewport">
-                        <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-img" id="sampleImg" onclick="toggleZoom()">
+                        <div class="pdf-loading" id="pdfLoading">กำลังโหลดหน้าชีท...</div>
+                        <canvas id="pdfCanvas" class="vertical-sample-media" onclick="toggleZoom()" style="display:none;"></canvas>
+                        <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-media" id="sampleImg" onclick="toggleZoom()" style="display:none;">
                     </div>
                     <button class="slide-nav-btn slide-next" id="nextBtn" onclick="changePage(1)">›</button>
 
@@ -803,6 +839,8 @@
     </div>
 
     <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
         // ==========================================
         // 1. ลิงก์ Line ของร้าน
         // ==========================================
@@ -810,6 +848,9 @@
 
         // ==========================================
         // 2. ข้อมูลรายวิชาทั้ง 3 วิชา
+        // วิธีใส่ตัวอย่างชีท (sampleFiles):
+        // ใส่ชื่อไฟล์ ".pdf" และ/หรือไฟล์รูปภาพ ".png" / ".jpg" ที่อัปโหลดขึ้น GitHub ลงใน sampleFiles ได้เลย
+        // เช่น sampleFiles: ["micro-sample.pdf", "micro-pic.png"]
         // ==========================================
         const notesData = [
             {
@@ -817,14 +858,13 @@
                 titleEn: "Information Resources for Research",
                 profNote: "เนื้อหารวม Mid + Final (สอบครั้งเดียว)",
                 badgeText: "รวม Mid+Final • 21 หน้า",
-                coverImg: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=750&h=1000&q=85",
                 prices: [
                     { label: "Mid + Final (ไฟล์เดียวจบ)", price: "35 ฿" }
                 ],
                 sampleGroups: [
                     {
                         tabName: "ตัวอย่างชีท (Mid + Final)",
-                        images: [
+                        sampleFiles: [
                             "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=750&h=1000&q=85"
                         ]
                     }
@@ -861,7 +901,6 @@
                 titleEn: "Social and Politics",
                 profNote: "แยกเล่ม Midterm & Final",
                 badgeText: "Mid 17 หน้า / Final 24 หน้า",
-                coverImg: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=750&h=1000&q=85",
                 prices: [
                     { label: "Midterm", price: "35 ฿" },
                     { label: "Final", price: "35 ฿" }
@@ -869,13 +908,13 @@
                 sampleGroups: [
                     {
                         tabName: "ตัวอย่าง Midterm",
-                        images: [
+                        sampleFiles: [
                             "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=750&h=1000&q=85"
                         ]
                     },
                     {
                         tabName: "ตัวอย่าง Final",
-                        images: [
+                        sampleFiles: [
                             "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=750&h=1000&q=85"
                         ]
                     }
@@ -954,14 +993,13 @@
                 titleEn: "Microeconomics",
                 profNote: "มีขายเฉพาะเนื้อหา Final",
                 badgeText: "Final 11 หน้า",
-                coverImg: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=750&h=1000&q=85",
                 prices: [
                     { label: "Final", price: "35 ฿" }
                 ],
                 sampleGroups: [
                     {
                         tabName: "ตัวอย่าง Final",
-                        images: [
+                        sampleFiles: [
                             "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=750&h=1000&q=85"
                         ]
                     }
@@ -994,13 +1032,27 @@
 
         let activeIndex = 0;
         let activeTabIndex = 0;
-        let activePage = 0;
+        let activeSlideIndex = 0;
+        let expandedSlides = [];
         let zoomed = false;
+        const pdfCache = {};
+
+        function isPdf(url) {
+            return url && url.toLowerCase().split('?')[0].endsWith('.pdf');
+        }
+
+        async function loadPdfDocument(url) {
+            if (pdfCache[url]) return pdfCache[url];
+            const loadingTask = pdfjsLib.getDocument(url);
+            const pdf = await loadingTask.promise;
+            pdfCache[url] = pdf;
+            return pdf;
+        }
 
         function renderCatalog() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = notesData.map((item, idx) => {
-                const badgeHtml = item.badgeText ? `<span class="top-badge">${item.badgeText}</span>` : '';
+                const badgeHtml = item.badgeText ? `<span class="page-badge">${item.badgeText}</span>` : '';
                 const priceBoxesHtml = item.prices.map(p => `
                     <div class="price-box">
                         <span>${p.label}</span>
@@ -1010,27 +1062,29 @@
 
                 return `
                     <article class="product-card" onclick="openProduct(${idx})">
-                        <div class="cover-frame">
-                            ${badgeHtml}
-                            <img src="${item.coverImg}" alt="${item.titleTh}">
-                        </div>
-                        <div class="card-content">
-                            <div class="subject-en">${item.titleEn}</div>
+                        <div class="card-main-info">
+                            <div class="card-top-meta">
+                                <span class="subject-en">${item.titleEn}</span>
+                                ${badgeHtml}
+                            </div>
                             <h2 class="subject-th">${item.titleTh}</h2>
                             <div class="subject-prof">${item.profNote}</div>
-                            <div class="price-grid">
+                        </div>
+                        <div class="card-right-action">
+                            <div class="price-pills-row">
                                 ${priceBoxesHtml}
                             </div>
+                            <span class="preview-link-pill">ดูตัวอย่างชีท & เนื้อหาด้านใน →</span>
                         </div>
                     </article>
                 `;
             }).join('');
         }
 
-        function openProduct(idx) {
+        async function openProduct(idx) {
             activeIndex = idx;
             activeTabIndex = 0;
-            activePage = 0;
+            activeSlideIndex = 0;
             resetZoom();
 
             const item = notesData[idx];
@@ -1038,7 +1092,6 @@
             document.getElementById('modalTh').innerText = item.titleTh;
 
             renderSampleTabs();
-            updatePreviewImage();
 
             const syllabusContainer = document.getElementById('syllabusContainer');
             syllabusContainer.innerHTML = item.sections.map(sec => {
@@ -1082,6 +1135,8 @@
 
             document.getElementById('productModal').style.display = 'flex';
             document.querySelector('.modal-scroll-body').scrollTop = 0;
+
+            await buildSlideDeck();
         }
 
         function renderSampleTabs() {
@@ -1098,31 +1153,96 @@
             `).join('');
         }
 
-        function switchSampleTab(tIdx) {
+        async function switchSampleTab(tIdx) {
             activeTabIndex = tIdx;
-            activePage = 0;
+            activeSlideIndex = 0;
             resetZoom();
             renderSampleTabs();
-            updatePreviewImage();
+            await buildSlideDeck();
         }
 
-        function updatePreviewImage() {
-            const item = notesData[activeIndex];
-            const currentGroup = item.sampleGroups[activeTabIndex];
-            const total = currentGroup.images.length;
+        async function buildSlideDeck() {
+            const currentGroup = notesData[activeIndex].sampleGroups[activeTabIndex];
+            const files = currentGroup.sampleFiles || [];
+            const loading = document.getElementById('pdfLoading');
+            const canvas = document.getElementById('pdfCanvas');
+            const img = document.getElementById('sampleImg');
 
-            document.getElementById('sampleImg').src = currentGroup.images[activePage];
-            document.getElementById('pageText').innerText = `หน้า ${activePage + 1} จาก ${total}`;
+            canvas.style.display = 'none';
+            img.style.display = 'none';
+            loading.innerText = "กำลังโหลดหน้าชีท...";
+            loading.style.display = 'block';
 
+            expandedSlides = [];
+
+            for (const fileUrl of files) {
+                if (isPdf(fileUrl)) {
+                    try {
+                        const pdf = await loadPdfDocument(fileUrl);
+                        for (let p = 1; p <= pdf.numPages; p++) {
+                            expandedSlides.push({ type: 'pdf', pdfDoc: pdf, pageNum: p });
+                        }
+                    } catch (e) {
+                        console.error("โหลด PDF ไม่สำเร็จ:", fileUrl, e);
+                    }
+                } else {
+                    expandedSlides.push({ type: 'image', url: fileUrl });
+                }
+            }
+
+            if (expandedSlides.length === 0) {
+                loading.innerText = "ไม่พบไฟล์ตัวอย่าง กรุณาตรวจสอบชื่อไฟล์";
+                updateToolbar();
+                return;
+            }
+
+            activeSlideIndex = 0;
+            await renderCurrentSlide();
+        }
+
+        async function renderCurrentSlide() {
+            const slide = expandedSlides[activeSlideIndex];
+            const canvas = document.getElementById('pdfCanvas');
+            const img = document.getElementById('sampleImg');
+            const loading = document.getElementById('pdfLoading');
+
+            if (slide.type === 'pdf') {
+                img.style.display = 'none';
+                canvas.style.display = 'block';
+                loading.style.display = 'block';
+
+                const page = await slide.pdfDoc.getPage(slide.pageNum);
+                const viewport = page.getViewport({ scale: 2.5 });
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+                loading.style.display = 'none';
+            } else {
+                canvas.style.display = 'none';
+                loading.style.display = 'none';
+                img.style.display = 'block';
+                img.src = slide.url;
+            }
+
+            updateToolbar();
+        }
+
+        function updateToolbar() {
+            const total = expandedSlides.length || 1;
+            document.getElementById('pageText').innerText = `หน้า ${activeSlideIndex + 1} จาก ${total}`;
             document.getElementById('prevBtn').style.display = total > 1 ? 'block' : 'none';
             document.getElementById('nextBtn').style.display = total > 1 ? 'block' : 'none';
         }
 
-        function changePage(dir) {
+        async function changePage(dir) {
+            const total = expandedSlides.length;
+            if (total <= 1) return;
             resetZoom();
-            const total = notesData[activeIndex].sampleGroups[activeTabIndex].images.length;
-            activePage = (activePage + dir + total) % total;
-            updatePreviewImage();
+            activeSlideIndex = (activeSlideIndex + dir + total) % total;
+            await renderCurrentSlide();
         }
 
         function toggleZoom() {
