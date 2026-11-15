@@ -3,25 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>was.shortnote | สรุปรายวิชาที่เปิดจำหน่าย</title>
+    <title>was.shortnote | Curated Study Notes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-page: #FAF6F4;
-            --bg-card: #FFFFFF;
-            --bg-pink: #F5EAE8;
-            --bg-pink-soft: #FBF4F3;
-            --text-dark: #2C2827;
-            --text-muted: #7C6D68;
-            --accent-taupe: #9E8A84;
-            --accent-hover: #826F69;
-            --badge-mid-bg: #F3E5E2;
-            --badge-mid-text: #6E5650;
-            --badge-bundle-bg: #FDF3DF;
-            --badge-bundle-text: #9C7832;
-            --border-color: #EADCD9;
+            --bg-main: #FFFFFF;
+            --bg-blush: #F5EAE8;
+            --bg-cream: #FAF6F4;
+            --text-ink: #2C2827;
+            --text-taupe: #7C6D68;
+            --accent-rose: #9E8A84;
+            --accent-deep: #7A6660;
+            --border-soft: #EADCD9;
+            --tag-bundle: #FDF4E3;
+            --tag-bundle-text: #946F2B;
         }
 
         * {
@@ -32,20 +29,31 @@
         }
 
         body {
-            background-color: var(--bg-page);
-            color: var(--text-dark);
+            background-color: var(--bg-main);
+            color: var(--text-ink);
             line-height: 1.6;
-            padding-bottom: 60px;
+        }
+
+        /* Top Announcement Bar */
+        .promo-strip {
+            background-color: var(--bg-blush);
+            color: var(--text-ink);
+            text-align: center;
+            font-size: 0.8rem;
+            padding: 8px 16px;
+            letter-spacing: 0.4px;
+            border-bottom: 1px solid var(--border-soft);
         }
 
         /* Header */
         header {
-            background-color: var(--bg-card);
-            padding: 16px 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 18px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-soft);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -53,196 +61,186 @@
 
         .brand-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--text-ink);
             text-decoration: none;
+            letter-spacing: -0.3px;
         }
 
-        .line-header-btn {
-            background-color: var(--accent-taupe);
-            color: #FFFFFF;
+        .contact-pill {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            color: var(--text-ink);
             text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 20px;
+            padding: 7px 18px;
+            border-radius: 30px;
             font-size: 0.85rem;
-            font-weight: 500;
             transition: 0.2s;
         }
 
-        .line-header-btn:hover {
-            background-color: var(--accent-hover);
+        .contact-pill:hover {
+            background-color: var(--accent-rose);
+            color: #FFFFFF;
+            border-color: var(--accent-rose);
         }
 
-        /* Main Container */
-        .container {
-            max-width: 720px;
-            margin: 32px auto 0;
-            padding: 0 18px;
+        /* Hero Section (Editorial Style) */
+        .hero {
+            background-color: var(--bg-cream);
+            padding: 52px 6% 48px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-soft);
         }
 
-        /* Section Title & Info Box (เหมือนภาพตัวอย่าง) */
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-taupe);
+            margin-bottom: 8px;
         }
 
-        .section-icon {
-            background-color: var(--accent-taupe);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-
-        .section-header h1 {
-            font-size: 1.25rem;
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--text-ink);
+            margin-bottom: 10px;
         }
 
-        .notice-banner {
-            background-color: var(--bg-pink);
-            border-left: 4px solid var(--accent-taupe);
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-bottom: 24px;
-            font-size: 0.85rem;
-            color: var(--text-dark);
+        .hero p {
+            color: var(--text-taupe);
+            font-size: 0.92rem;
+            max-width: 540px;
+            margin: 0 auto;
         }
 
-        .notice-banner p {
-            margin-bottom: 4px;
+        /* Catalog Section */
+        .catalog-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 5% 80px;
         }
 
-        .notice-banner p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Subject Card List */
-        .subject-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .subject-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px 22px;
-            box-shadow: 0 4px 14px rgba(158, 138, 132, 0.06);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(158, 138, 132, 0.12);
-        }
-
-        .card-top {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
-        .book-icon-box {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background-color: var(--bg-pink-soft);
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .subject-title-th {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            line-height: 1.3;
-        }
-
-        .subject-title-en {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-        }
-
-        /* Price Row */
-        .price-row {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--bg-page);
-            margin-bottom: 14px;
-            flex-wrap: wrap;
-        }
-
-        .price-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-        }
-
-        .price-pill {
-            background-color: var(--badge-mid-bg);
-            color: var(--badge-mid-text);
-            font-weight: 600;
-            padding: 2px 10px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-        }
-
-        /* Card Bottom Actions */
-        .card-bottom {
+        .catalog-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-soft);
+            font-size: 0.85rem;
+            color: var(--text-taupe);
         }
 
-        .preview-btn {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-dark);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.82rem;
+        /* Boutique Grid Layout (ต่างจาก uninote ที่เรียงแถวเดี่ยว) */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .product-card {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            overflow: hidden;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.2s;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
         }
 
-        .preview-btn:hover {
-            background-color: var(--bg-pink);
-            border-color: var(--accent-taupe);
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(158, 138, 132, 0.14);
+            border-color: var(--accent-rose);
         }
 
-        .bundle-pill {
-            background-color: var(--badge-bundle-bg);
-            color: var(--badge-bundle-text);
-            font-size: 0.8rem;
+        /* ภาพปกแนวตั้ง 3:4 สำหรับชีทสรุป */
+        .cover-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background-color: var(--bg-blush);
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .cover-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .product-card:hover .cover-frame img {
+            transform: scale(1.03);
+        }
+
+        .bundle-ribbon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: var(--tag-bundle);
+            color: var(--tag-bundle-text);
+            border: 1px solid #F0DFC0;
+            font-size: 0.75rem;
             font-weight: 600;
             padding: 4px 12px;
-            border-radius: 8px;
+            border-radius: 20px;
         }
 
-        /* Preview Modal (เหมือนภาพที่ 2) */
+        .card-content {
+            padding: 18px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .subject-en {
+            font-size: 0.76rem;
+            color: var(--text-taupe);
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+        }
+
+        .subject-th {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: var(--text-ink);
+            margin-bottom: 14px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .price-box {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            border-radius: 8px;
+            padding: 7px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+        }
+
+        .price-box span:first-child {
+            color: var(--text-taupe);
+        }
+
+        .price-box strong {
+            color: var(--text-ink);
+            font-weight: 600;
+        }
+
+        /* Product Detail Modal (Vertical Sample + Detailed Syllabus Below) */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -254,39 +252,36 @@
             padding: 16px;
         }
 
-        .modal-card {
-            background: #FFFFFF;
+        .modal-sheet {
+            background-color: var(--bg-main);
             width: 100%;
-            max-width: 680px;
-            border-radius: 20px;
+            max-width: 580px;
+            max-height: 92vh;
+            border-radius: 18px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            max-height: 92vh;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         }
 
-        .modal-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-color);
+        .modal-top-bar {
+            padding: 16px 22px;
+            border-bottom: 1px solid var(--border-soft);
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .modal-header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            background-color: var(--bg-main);
+            flex-shrink: 0;
         }
 
         .close-btn {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            border: 1px solid var(--border-color);
-            background: var(--bg-page);
-            color: var(--text-muted);
+            border: 1px solid var(--border-soft);
+            background: var(--bg-cream);
+            color: var(--text-ink);
             font-size: 1.1rem;
             cursor: pointer;
             display: flex;
@@ -294,193 +289,294 @@
             justify-content: center;
         }
 
-        /* Image Viewer Area */
-        .viewer-area {
-            position: relative;
-            background-color: #F4EFEA;
+        /* พื้นที่เลื่อนดูทั้งภาพตัวอย่างแนวตั้งและรายละเอียดด้านล่าง */
+        .modal-scroll-body {
+            overflow-y: auto;
             flex-grow: 1;
-            min-height: 340px;
-            max-height: 55vh;
+        }
+
+        /* ส่วนแสดงภาพตัวอย่างชีทแนวตั้ง */
+        .vertical-preview-zone {
+            position: relative;
+            background-color: var(--bg-cream);
+            padding: 22px 16px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
+        .img-viewport {
+            width: 100%;
+            max-height: 56vh;
             overflow: auto;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 16px;
+            align-items: flex-start;
+            border-radius: 8px;
         }
 
-        .viewer-area.zoomed {
-            align-items: flex-start;
+        .vertical-sample-img {
+            width: auto;
+            max-width: 100%;
+            max-height: 54vh;
+            aspect-ratio: 3 / 4;
+            object-fit: contain;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(44, 40, 39, 0.1);
+            cursor: zoom-in;
+            transition: width 0.2s ease;
+        }
+
+        .img-viewport.is-zoomed {
             justify-content: flex-start;
         }
 
-        .sample-img {
-            max-width: 100%;
-            max-height: 48vh;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease;
-            cursor: zoom-in;
-        }
-
-        .viewer-area.zoomed .sample-img {
+        .img-viewport.is-zoomed .vertical-sample-img {
             max-width: none;
             max-height: none;
             width: 165%;
             cursor: zoom-out;
         }
 
-        .nav-arrow {
-            position: fixed;
-            top: 48%;
+        .slide-nav-btn {
+            position: absolute;
+            top: 44%;
             transform: translateY(-50%);
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            border: none;
-            background: rgba(158, 138, 132, 0.85);
-            color: white;
-            font-size: 1.1rem;
+            border: 1px solid var(--border-soft);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text-ink);
+            font-size: 1.2rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            z-index: 5;
         }
 
-        .nav-arrow:hover {
-            background: var(--text-dark);
-        }
+        .slide-prev { left: 14px; }
+        .slide-next { right: 14px; }
 
-        .prev-arrow { left: max(24px, calc(50% - 315px)); }
-        .next-arrow { right: max(24px, calc(50% - 315px)); }
-
-        /* Viewer Controls (หน้า 1 จาก X + ซูมดูใกล้ๆ) */
-        .viewer-controls {
-            background-color: #F4EFEA;
-            padding: 8px 16px 14px;
+        .preview-toolbar {
             display: flex;
-            justify-content: center;
-            align-items: center;
             gap: 10px;
-            border-bottom: 1px solid var(--border-color);
+            margin-top: 14px;
         }
 
-        .control-pill {
+        .tool-chip {
             background: #FFFFFF;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-soft);
             padding: 5px 14px;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            color: var(--text-dark);
+            border-radius: 20px;
+            font-size: 0.78rem;
+            color: var(--text-ink);
         }
 
-        .zoom-btn {
+        .zoom-trigger {
             cursor: pointer;
-            display: inline-flex;
+        }
+
+        .zoom-trigger:hover {
+            background-color: var(--bg-blush);
+        }
+
+        /* ส่วนรายละเอียดหัวข้อเนื้อหาด้านล่างภาพ */
+        .syllabus-section {
+            padding: 22px 24px 28px;
+            background-color: #FFFFFF;
+        }
+
+        .syllabus-heading {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-ink);
+            margin-bottom: 12px;
+            display: flex;
             align-items: center;
-            gap: 5px;
-            transition: 0.2s;
+            gap: 6px;
         }
 
-        .zoom-btn:hover {
-            background-color: var(--bg-pink);
+        .topic-group {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
         }
 
-        /* Modal Footer */
-        .modal-footer {
-            padding: 16px 20px;
-            background: #FFFFFF;
+        .topic-group-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-deep);
+            margin-bottom: 6px;
+        }
+
+        .topic-list {
+            list-style: none;
+            font-size: 0.84rem;
+            color: var(--text-ink);
+        }
+
+        .topic-list li {
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 4px;
+        }
+
+        .topic-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-rose);
+        }
+
+        .file-spec-note {
+            font-size: 0.8rem;
+            color: var(--text-taupe);
+            margin-top: 8px;
+        }
+
+        /* Modal Sticky Bottom Bar */
+        .modal-bottom-bar {
+            padding: 14px 22px;
+            background-color: var(--bg-main);
+            border-top: 1px solid var(--border-soft);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
             gap: 12px;
+            flex-shrink: 0;
         }
 
-        .modal-price-info {
-            font-size: 0.9rem;
+        .bottom-prices {
+            font-size: 0.86rem;
+        }
+
+        .bottom-prices .bundle-highlight {
+            color: var(--tag-bundle-text);
             font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .modal-bundle-note {
             font-size: 0.8rem;
-            color: var(--badge-bundle-text);
-            font-weight: 500;
         }
 
-        .line-order-btn {
-            background-color: var(--accent-taupe);
+        .line-cta-btn {
+            background-color: var(--accent-rose);
             color: #FFFFFF;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 10px 22px;
             border-radius: 24px;
             font-size: 0.88rem;
             font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
             transition: 0.2s;
+            white-space: nowrap;
         }
 
-        .line-order-btn:hover {
-            background-color: var(--accent-hover);
+        .line-cta-btn:hover {
+            background-color: var(--accent-deep);
+        }
+
+        footer {
+            background-color: var(--bg-cream);
+            border-top: 1px solid var(--border-soft);
+            text-align: center;
+            padding: 28px 5%;
+            font-size: 0.82rem;
+            color: var(--text-taupe);
+        }
+
+        @media (max-width: 640px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="brand-logo">was.shortnote</a>
-        <a href="https://line.me/ti/p/@was.shortnote" target="_blank" class="line-header-btn">💬 ทักแชท Line ร้าน</a>
-    </header>
-
-    <div class="container">
-        <div class="section-header">
-            <div class="section-icon">📋</div>
-            <h1>สรุปรายวิชาที่เปิดจำหน่าย</h1>
-        </div>
-
-        <div class="notice-banner">
-            <p>📌 <strong>สรุปแบ่งเป็น Midterm และ Final</strong> แยกซื้อได้ตามต้องการ</p>
-            <p>💡 หากสนใจวิชาไหน <strong>สามารถกดดูตัวอย่างได้เลย !</strong></p>
-        </div>
-
-        <div class="subject-list" id="subjectList"></div>
+    <div class="promo-strip">
+        ✨ ซื้อครบเซต Midterm + Final รับราคาพิเศษทุกวิชา • จัดส่งไฟล์ PDF ผ่าน Google Drive ทันที ✨
     </div>
 
-    <!-- Modal ดูตัวอย่างหน้าชีท + ซูม + ลิงก์ไป Line -->
-    <div class="modal-overlay" id="previewModal" onclick="if(event.target === this) closeModal()">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-header-left">
-                    <div class="book-icon-box" id="modalIcon">📘</div>
-                    <div>
-                        <div class="subject-title-th" id="modalTitleTh">ชื่อวิชา</div>
-                        <div class="subject-title-en" id="modalTitleEn">Subject Name • ตัวอย่างสรุปเนื้อหา</div>
-                    </div>
+    <header>
+        <a href="#" class="brand-logo">was.shortnote</a>
+        <a href="https://line.me/ti/p/@was.shortnote" target="_blank" class="contact-pill">สั่งซื้อ / สอบถามทาง Line</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-eyebrow">Digital Study Notes</div>
+        <h1>Shortnote Collection</h1>
+        <p>สรุปเนื้อหาอ่านง่าย กระชับ ตรงประเด็น กดที่แต่ละวิชาเพื่อดูตัวอย่างหน้าชีทและหัวข้อเนื้อหาทั้งหมดด้านใน</p>
+    </section>
+
+    <main class="catalog-wrap">
+        <div class="catalog-meta">
+            <span>รายวิชาที่เปิดจำหน่าย</span>
+            <span>คลิกที่การ์ดวิชาเพื่อดูตัวอย่างและหัวข้อเนื้อหา</span>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </main>
+
+    <footer>
+        © 2026 was.shortnote • All rights reserved.
+    </footer>
+
+    <!-- Modal รายละเอียดสินค้า (ภาพตัวอย่างแนวตั้ง + รายละเอียดหัวข้อด้านล่าง) -->
+    <div class="modal-overlay" id="productModal" onclick="if(event.target === this) closeModal()">
+        <div class="modal-sheet">
+            <div class="modal-top-bar">
+                <div>
+                    <div class="subject-en" id="modalEn">Subject Name</div>
+                    <div class="subject-th" id="modalTh" style="margin-bottom: 0; font-size: 1.05rem;">ชื่อวิชา</div>
                 </div>
                 <button class="close-btn" onclick="closeModal()">✕</button>
             </div>
 
-            <div class="viewer-area" id="viewerArea">
-                <button class="nav-arrow prev-arrow" id="prevBtn" onclick="changeSlide(-1)">‹</button>
-                <img src="" alt="ตัวอย่างชีทสรุป" class="sample-img" id="sampleImg" onclick="toggleZoom()">
-                <button class="nav-arrow next-arrow" id="nextBtn" onclick="changeSlide(1)">›</button>
-            </div>
+            <div class="modal-scroll-body">
+                <!-- ภาพตัวอย่างแนวตั้ง -->
+                <div class="vertical-preview-zone">
+                    <button class="slide-nav-btn slide-prev" id="prevBtn" onclick="changePage(-1)">‹</button>
+                    <div class="img-viewport" id="imgViewport">
+                        <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-img" id="sampleImg" onclick="toggleZoom()">
+                    </div>
+                    <button class="slide-nav-btn slide-next" id="nextBtn" onclick="changePage(1)">›</button>
 
-            <div class="viewer-controls">
-                <span class="control-pill" id="pageIndicator">หน้า 1 จาก 2</span>
-                <button class="control-pill zoom-btn" id="zoomBtn" onclick="toggleZoom()">🔍 ซูมดูใกล้ๆ</button>
-            </div>
-
-            <div class="modal-footer">
-                <div>
-                    <div class="modal-price-info" id="modalPriceText">Midterm 49 ฿ | Final 55 ฿</div>
-                    <div class="modal-bundle-note" id="modalBundleText">⭐ ซื้อคู่เพียง 95 ฿</div>
+                    <div class="preview-toolbar">
+                        <span class="tool-chip" id="pageText">หน้า 1 จาก 2</span>
+                        <button class="tool-chip zoom-trigger" id="zoomBtn" onclick="toggleZoom()">🔍 ซูมดูใกล้ๆ</button>
+                    </div>
                 </div>
-                <a href="#" target="_blank" class="line-order-btn" id="lineOrderLink">
-                    💬 ทักแชทสั่งซื้อวิชานี้
+
+                <!-- รายละเอียดหัวข้อในชีท (อยู่ด้านล่างภาพ) -->
+                <div class="syllabus-section">
+                    <div class="syllabus-heading">📑 รายละเอียดหัวข้อเนื้อหาในชีท</div>
+                    
+                    <div class="topic-group">
+                        <div class="topic-group-title" id="midHeader">ส่วนที่ 1: เนื้อหา Midterm</div>
+                        <ul class="topic-list" id="midTopics"></ul>
+                    </div>
+
+                    <div class="topic-group">
+                        <div class="topic-group-title" id="finalHeader">ส่วนที่ 2: เนื้อหา Final</div>
+                        <ul class="topic-list" id="finalTopics"></ul>
+                    </div>
+
+                    <div class="file-spec-note" id="fileSpec"></div>
+                </div>
+            </div>
+
+            <div class="modal-bottom-bar">
+                <div class="bottom-prices">
+                    <div id="bottomPriceLine"><strong>Mid 49 ฿</strong> • <strong>Final 55 ฿</strong></div>
+                    <div class="bundle-highlight" id="bottomBundleLine">ซื้อคู่เพียง 95 ฿</div>
+                </div>
+                <a href="#" target="_blank" class="line-cta-btn" id="lineOrderBtn">
+                    ทักแชทสั่งซื้อทาง Line
                 </a>
             </div>
         </div>
@@ -488,164 +584,209 @@
 
     <script>
         // ==========================================
-        // 1. ตั้งค่าลิงก์ Line ของร้านตรงนี้
+        // 1. ใส่ลิงก์ Line ของร้านตรงนี้
         // ==========================================
-        const SHOP_LINE_URL = "https://line.me/ti/p/@was.shortnote"; 
-        // (หากมี Line Official Account สามารถเปลี่ยนเป็น "https://lin.ee/รหัสของคุณ" ได้เลย)
+        const SHOP_LINE_URL = "https://line.me/ti/p/@was.shortnote";
 
         // ==========================================
-        // 2. แก้ไขรายวิชา ราคา Midterm / Final / ซื้อคู่ และรูปตัวอย่างตรงนี้
+        // 2. ข้อมูลรายวิชา ราคา รูปตัวอย่างแนวตั้ง และหัวข้อเนื้อหา
         // ==========================================
-        const subjects = [
+        const notesData = [
             {
-                icon: "📘",
                 titleTh: "เศรษฐศาสตร์จุลภาค",
                 titleEn: "Microeconomics",
                 midPrice: "49 ฿",
                 finalPrice: "55 ฿",
                 bundlePrice: "95 ฿",
-                // ใส่ลิงก์รูปภาพตัวอย่างชีทของวิชานี้ได้หลายรูป (คั่นด้วยลูกน้ำ)
+                // รูปปกและภาพตัวอย่างแนวตั้ง (สามารถใส่ได้หลายหน้า)
                 samples: [
-                    "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=85",
-                    "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=900&q=85"
-                ]
+                    "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=750&h=1000&q=85",
+                    "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=750&h=1000&q=85"
+                ],
+                midTopics: [
+                    "บทที่ 1: พื้นฐานเศรษฐศาสตร์และเส้นความเป็นไปได้ในการผลิต (PPC)",
+                    "บทที่ 2: อุปสงค์ อุปทาน และดุลยภาพตลาด",
+                    "บทที่ 3: ความยืดหยุ่นของอุปสงค์และอุปทาน (Elasticity)",
+                    "บทที่ 4: ทฤษฎีพฤติกรรมผู้บริโภค (Utility & Indifference Curve)"
+                ],
+                finalTopics: [
+                    "บทที่ 5: ทฤษฎีการผลิตและต้นทุนการผลิตระยะสั้น-ระยะยาว",
+                    "บทที่ 6: ตลาดแข่งขันสมบูรณ์ (Perfect Competition)",
+                    "บทที่ 7: ตลาดผูกขาด (Monopoly) และตลาดกึ่งแข่งขันกึ่งผูกขาด",
+                    "บทที่ 8: ตลาดผู้ขายน้อยราย (Oligopoly) และทฤษฎีเกมเบื้องต้น"
+                ],
+                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง (Midterm 28 หน้า / Final 32 หน้า)"
             },
             {
-                icon: "📙",
                 titleTh: "เศรษฐศาสตร์มหภาค",
                 titleEn: "Macroeconomics",
                 midPrice: "45 ฿",
                 finalPrice: "49 ฿",
                 bundlePrice: "85 ฿",
                 samples: [
-                    "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=85",
-                    "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=900&q=85"
-                ]
+                    "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=750&h=1000&q=85",
+                    "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=750&h=1000&q=85"
+                ],
+                midTopics: [
+                    "บทที่ 1: รายได้ประชาชาติและการคำนวณ GDP / GNP",
+                    "บทที่ 2: การบริโภค การออม และการลงทุน",
+                    "บทที่ 3: ดุลยภาพรายได้ประชาชาติและตัวทวี (Multiplier)"
+                ],
+                finalTopics: [
+                    "บทที่ 4: เงินเฟ้อ เงินฝืด และการว่างงาน",
+                    "บทที่ 5: นโยบายการเงินและธนาคารกลาง (Monetary Policy)",
+                    "บทที่ 6: นโยบายการคลังและงบประมาณแผ่นดิน (Fiscal Policy)",
+                    "บทที่ 7: การค้าระหว่างประเทศและอัตราแลกเปลี่ยน"
+                ],
+                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง (Midterm 24 หน้า / Final 26 หน้า)"
             },
             {
-                icon: "📕",
                 titleTh: "คณิตศาสตร์ธุรกิจ",
                 titleEn: "Math for Business",
                 midPrice: "39 ฿",
                 finalPrice: "45 ฿",
                 bundlePrice: "75 ฿",
                 samples: [
-                    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85"
-                ]
+                    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=750&h=1000&q=85"
+                ],
+                midTopics: [
+                    "บทที่ 1: ฟังก์ชันเชิงเส้นและสมการเส้นตรงทางธุรกิจ",
+                    "บทที่ 2: จุดคุ้มทุน (Break-Even Point) และฟังก์ชันกำไร",
+                    "บทที่ 3: เมทริกซ์และการแก้ระบบสมการเชิงเส้น"
+                ],
+                finalTopics: [
+                    "บทที่ 4: ลิมิตและความต่อเนื่องของฟังก์ชัน",
+                    "บทที่ 5: อนุพันธ์ (Differentiation) และการหาค่าสูงสุด-ต่ำสุด",
+                    "บทที่ 6: คณิตศาสตร์การเงิน ดอกเบี้ยทบต้น และมูลค่าปัจจุบัน"
+                ],
+                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง รวมสูตรลัดและตัวอย่างโจทย์ทีละขั้น"
             },
             {
-                icon: "📗",
                 titleTh: "หลักการตลาด",
                 titleEn: "Principles of Marketing",
                 midPrice: "49 ฿",
                 finalPrice: "49 ฿",
                 bundlePrice: "89 ฿",
                 samples: [
-                    "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=85"
-                ]
+                    "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=750&h=1000&q=85"
+                ],
+                midTopics: [
+                    "บทที่ 1: แนวคิดหลักทางการตลาดและกระบวนการสร้างคุณค่า",
+                    "บทที่ 2: การวิเคราะห์สภาพแวดล้อมทางการตลาด (SWOT / PESTEL)",
+                    "บทที่ 3: พฤติกรรมผู้บริโภคและกระบวนการตัดสินใจซื้อ",
+                    "บทที่ 4: การแบ่งส่วนตลาด การเลือกกลุ่มเป้าหมาย และการวางตำแหน่ง (STP)"
+                ],
+                finalTopics: [
+                    "บทที่ 5: กลยุทธ์ผลิตภัณฑ์และการสร้างแบรนด์ (Product & Branding)",
+                    "บทที่ 6: กลยุทธ์การตั้งราคา (Pricing Strategies)",
+                    "บทที่ 7: ช่องทางการจัดจำหน่าย (Place & Supply Chain)",
+                    "บทที่ 8: การสื่อสารการตลาดแบบบูรณาการ (Promotion & IMC)"
+                ],
+                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง สรุปเป็นตารางและ Mindmap จำง่าย"
             }
         ];
 
-        let currentSubjectIndex = 0;
-        let currentSlideIndex = 0;
-        let isZoomed = false;
+        let activeIndex = 0;
+        let activePage = 0;
+        let zoomed = false;
 
-        // แสดงการ์ดรายวิชาทั้งหมดบนหน้าเว็บ
-        function renderSubjects() {
-            const listEl = document.getElementById('subjectList');
-            listEl.innerHTML = subjects.map((sub, index) => `
-                <div class="subject-card">
-                    <div class="card-top">
-                        <div class="book-icon-box">${sub.icon}</div>
-                        <div>
-                            <div class="subject-title-th">${sub.titleTh}</div>
-                            <div class="subject-title-en">${sub.titleEn}</div>
+        function renderCatalog() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = notesData.map((item, idx) => `
+                <article class="product-card" onclick="openProduct(${idx})">
+                    <div class="cover-frame">
+                        <span class="bundle-ribbon">ซื้อคู่ ${item.bundlePrice}</span>
+                        <img src="${item.samples[0]}" alt="${item.titleTh}">
+                    </div>
+                    <div class="card-content">
+                        <div class="subject-en">${item.titleEn}</div>
+                        <h2 class="subject-th">${item.titleTh}</h2>
+                        <div class="price-grid">
+                            <div class="price-box">
+                                <span>Midterm</span>
+                                <strong>${item.midPrice}</strong>
+                            </div>
+                            <div class="price-box">
+                                <span>Final</span>
+                                <strong>${item.finalPrice}</strong>
+                            </div>
                         </div>
                     </div>
-                    <div class="price-row">
-                        <div class="price-item">
-                            <span>Midterm</span>
-                            <span class="price-pill">${sub.midPrice}</span>
-                        </div>
-                        <div class="price-item">
-                            <span>Final</span>
-                            <span class="price-pill">${sub.finalPrice}</span>
-                        </div>
-                    </div>
-                    <div class="card-bottom">
-                        <button class="preview-btn" onclick="openPreview(${index})">
-                            👁️ ขอดูตัวอย่าง
-                        </button>
-                        <span class="bundle-pill">ซื้อคู่ ${sub.bundlePrice}</span>
-                    </div>
-                </div>
+                </article>
             `).join('');
         }
 
-        // เปิดหน้าต่างดูตัวอย่างชีท
-        function openPreview(index) {
-            currentSubjectIndex = index;
-            currentSlideIndex = 0;
+        function openProduct(idx) {
+            activeIndex = idx;
+            activePage = 0;
             resetZoom();
 
-            const sub = subjects[index];
-            document.getElementById('modalIcon').innerText = sub.icon;
-            document.getElementById('modalTitleTh').innerText = sub.titleTh;
-            document.getElementById('modalTitleEn').innerText = `${sub.titleEn} • ตัวอย่างสรุปเนื้อหา`;
-            document.getElementById('modalPriceText').innerText = `Midterm ${sub.midPrice} | Final ${sub.finalPrice}`;
-            document.getElementById('modalBundleText').innerText = `⭐ ซื้อคู่เพียง ${sub.bundlePrice}`;
-            
-            // ตั้งลิงก์ปุ่มทักแชทไปที่ Line ของร้าน
-            document.getElementById('lineOrderLink').href = SHOP_LINE_URL;
+            const item = notesData[idx];
+            document.getElementById('modalEn').innerText = item.titleEn;
+            document.getElementById('modalTh').innerText = item.titleTh;
 
-            updateSlide();
-            document.getElementById('previewModal').style.display = 'flex';
+            // เติมหัวข้อเนื้อหา Midterm และ Final ด้านล่างภาพ
+            document.getElementById('midHeader').innerText = `ส่วนที่ 1: เนื้อหา Midterm (${item.midPrice})`;
+            document.getElementById('midTopics').innerHTML = item.midTopics.map(t => `<li>${t}</li>`).join('');
+
+            document.getElementById('finalHeader').innerText = `ส่วนที่ 2: เนื้อหา Final (${item.finalPrice})`;
+            document.getElementById('finalTopics').innerHTML = item.finalTopics.map(t => `<li>${t}</li>`).join('');
+
+            document.getElementById('fileSpec').innerText = `📌 ${item.fileInfo}`;
+
+            // ราคาและปุ่มลิงก์ไป Line
+            document.getElementById('bottomPriceLine').innerHTML = `<strong>Midterm ${item.midPrice}</strong> • <strong>Final ${item.finalPrice}</strong>`;
+            document.getElementById('bottomBundleLine').innerText = `⭐ ซื้อคู่เพียง ${item.bundlePrice}`;
+            document.getElementById('lineOrderBtn').href = SHOP_LINE_URL;
+
+            updatePreviewImage();
+            document.getElementById('productModal').style.display = 'flex';
+            document.querySelector('.modal-scroll-body').scrollTop = 0;
         }
 
-        function updateSlide() {
-            const sub = subjects[currentSubjectIndex];
-            const total = sub.samples.length;
-            document.getElementById('sampleImg').src = sub.samples[currentSlideIndex];
-            document.getElementById('pageIndicator').innerText = `หน้า ${currentSlideIndex + 1} จาก ${total}`;
+        function updatePreviewImage() {
+            const item = notesData[activeIndex];
+            const total = item.samples.length;
+            document.getElementById('sampleImg').src = item.samples[activePage];
+            document.getElementById('pageText').innerText = `หน้า ${activePage + 1} จาก ${total}`;
 
-            // ซ่อนปุ่มเลื่อนถ้ามีแค่ 1 รูป
-            document.getElementById('prevBtn').style.display = total > 1 ? 'flex' : 'none';
-            document.getElementById('nextBtn').style.display = total > 1 ? 'flex' : 'none';
+            document.getElementById('prevBtn').style.display = total > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = total > 1 ? 'block' : 'none';
         }
 
-        function changeSlide(step) {
+        function changePage(dir) {
             resetZoom();
-            const total = subjects[currentSubjectIndex].samples.length;
-            currentSlideIndex = (currentSlideIndex + step + total) % total;
-            updateSlide();
+            const total = notesData[activeIndex].samples.length;
+            activePage = (activePage + dir + total) % total;
+            updatePreviewImage();
         }
 
         function toggleZoom() {
-            const viewer = document.getElementById('viewerArea');
-            const zoomBtn = document.getElementById('zoomBtn');
-            isZoomed = !isZoomed;
+            const viewport = document.getElementById('imgViewport');
+            const btn = document.getElementById('zoomBtn');
+            zoomed = !zoomed;
 
-            if (isZoomed) {
-                viewer.classList.add('zoomed');
-                zoomBtn.innerHTML = '🔎 ย่อขนาดปกติ';
+            if (zoomed) {
+                viewport.classList.add('is-zoomed');
+                btn.innerText = '🔎 ย่อขนาดปกติ';
             } else {
-                viewer.classList.remove('zoomed');
-                zoomBtn.innerHTML = '🔍 ซูมดูใกล้ๆ';
+                viewport.classList.remove('is-zoomed');
+                btn.innerText = '🔍 ซูมดูใกล้ๆ';
             }
         }
 
         function resetZoom() {
-            isZoomed = false;
-            document.getElementById('viewerArea').classList.remove('zoomed');
-            document.getElementById('zoomBtn').innerHTML = '🔍 ซูมดูใกล้ๆ';
+            zoomed = false;
+            document.getElementById('imgViewport').classList.remove('is-zoomed');
+            document.getElementById('zoomBtn').innerText = '🔍 ซูมดูใกล้ๆ';
         }
 
         function closeModal() {
-            document.getElementById('previewModal').style.display = 'none';
+            document.getElementById('productModal').style.display = 'none';
             resetZoom();
         }
 
-        renderSubjects();
+        renderCatalog();
     </script>
 </body>
 </html>
