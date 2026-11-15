@@ -522,7 +522,7 @@
             color: rgba(44, 40, 39, 0.105);
         }
 
-        /* ป้ายคาดตรงกลางพร้อมเบลอเนื้อหาด้านหลัง */
+        /* ป้ายคาดตรงกลางพร้อมเบลอเนื้อหาด้านหลัง (แบบที่ 3: กรอบเส้นบาง + ตราประทับวงกลม W) */
         .center-blur-badge {
             position: absolute;
             top: 50%;
@@ -530,30 +530,52 @@
             transform: translate(-50%, -50%) rotate(-18deg);
             width: 86%;
             max-width: 340px;
-            padding: 13px 16px;
+            padding: 15px 16px 12px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.48);
+            background: rgba(255, 255, 255, 0.52);
             backdrop-filter: blur(5.5px);
             -webkit-backdrop-filter: blur(5.5px);
-            border: 1.5px dashed rgba(122, 102, 96, 0.45);
-            box-shadow: 0 4px 16px rgba(44, 40, 39, 0.08);
+            border: 1px solid rgba(158, 138, 132, 0.5);
+            box-shadow: 0 4px 16px rgba(44, 40, 39, 0.08), inset 0 0 0 3px rgba(255, 255, 255, 0.35);
             text-align: center;
             pointer-events: none;
             z-index: 3;
         }
 
+        .center-blur-badge .monogram-seal {
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #FAF6F4;
+            border: 1px solid rgba(158, 138, 132, 0.65);
+            box-shadow: 0 2px 6px rgba(44, 40, 39, 0.1);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #7A6660;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
         .center-blur-badge .badge-main {
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: rgba(44, 40, 39, 0.72);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 1.8px;
+            color: rgba(44, 40, 39, 0.8);
             line-height: 1.25;
         }
 
         .center-blur-badge .badge-sub {
             font-size: 0.68rem;
             font-weight: 500;
-            color: rgba(74, 62, 58, 0.78);
+            color: rgba(74, 62, 58, 0.82);
             margin-top: 3px;
         }
 
@@ -803,7 +825,7 @@
                 margin: 0 auto 14px;
             }
             .center-blur-badge .badge-main {
-                font-size: 0.82rem;
+                font-size: 0.9rem;
             }
             .center-blur-badge .badge-sub {
                 font-size: 0.62rem;
@@ -896,8 +918,9 @@
                                 <span class="wm-item" style="top: 88%; left: 76%;">was.shortnote</span>
                             </div>
 
-                            <!-- แถบเบลอตรงกลางพร้อมข้อความป้องกันการคัดลอก -->
+                            <!-- แถบเบลอตรงกลางพร้อมตราประทับวงกลม W -->
                             <div class="center-blur-badge" aria-hidden="true">
+                                <div class="monogram-seal">W</div>
                                 <div class="badge-main">WAS.SHORTNOTE SAMPLE</div>
                                 <div class="badge-sub">ตัวอย่างสรุปรายวิชา • ห้ามทำซ้ำหรือจำหน่าย</div>
                             </div>
