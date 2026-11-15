@@ -6,7 +6,7 @@
     <title>was.shortnote | Curated Study Notes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- โหลด PDF.js สำหรับแสดงผลไฟล์ PDF แบบคมชัด -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
@@ -453,6 +453,7 @@
             flex-direction: column;
             align-items: center;
             border-bottom: 1px solid var(--border-soft);
+            user-select: none;
         }
 
         .img-viewport {
@@ -467,15 +468,22 @@
             min-height: 260px;
         }
 
+        /* กล่องหุ้มชีท + ลายน้ำ + แถบเบลอตรงกลาง */
+        .sheet-stage {
+            position: relative;
+            display: inline-block;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(44, 40, 39, 0.1);
+            background: #FFFFFF;
+            cursor: zoom-in;
+        }
+
         .vertical-sample-media {
             width: auto;
             max-width: 100%;
             max-height: 53vh;
             object-fit: contain;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(44, 40, 39, 0.1);
-            cursor: zoom-in;
             display: block;
         }
 
@@ -483,12 +491,75 @@
             justify-content: flex-start;
         }
 
+        .img-viewport.is-zoomed .sheet-stage {
+            width: 185%;
+            cursor: zoom-out;
+        }
+
         .img-viewport.is-zoomed .vertical-sample-media {
             max-width: none;
             max-height: none;
-            width: 185%;
+            width: 100%;
             height: auto;
-            cursor: zoom-out;
+        }
+
+        /* ชั้นลายน้ำจางๆ กระจายทั่วหน้าชีท */
+        .watermark-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12% 6%;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .wm-row {
+            display: flex;
+            justify-content: space-around;
+            transform: rotate(-22deg);
+            white-space: nowrap;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: rgba(44, 40, 39, 0.11);
+        }
+
+        /* ป้ายคาดตรงกลางพร้อมเบลอเนื้อหาด้านหลัง */
+        .center-blur-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-18deg);
+            width: 86%;
+            max-width: 340px;
+            padding: 13px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.48);
+            backdrop-filter: blur(5.5px);
+            -webkit-backdrop-filter: blur(5.5px);
+            border: 1.5px dashed rgba(122, 102, 96, 0.45);
+            box-shadow: 0 4px 16px rgba(44, 40, 39, 0.08);
+            text-align: center;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .center-blur-badge .badge-main {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: rgba(44, 40, 39, 0.72);
+            line-height: 1.25;
+        }
+
+        .center-blur-badge .badge-sub {
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: rgba(74, 62, 58, 0.78);
+            margin-top: 3px;
         }
 
         .pdf-loading {
@@ -498,12 +569,12 @@
             transform: translate(-50%, -50%);
             font-size: 0.85rem;
             color: var(--text-taupe);
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.95);
             padding: 8px 16px;
             border-radius: 20px;
             border: 1px solid var(--border-soft);
             display: none;
-            z-index: 3;
+            z-index: 6;
         }
 
         .slide-nav-btn {
@@ -736,6 +807,12 @@
             .line-id-box {
                 margin: 0 auto 14px;
             }
+            .center-blur-badge .badge-main {
+                font-size: 0.82rem;
+            }
+            .center-blur-badge .badge-sub {
+                font-size: 0.62rem;
+            }
         }
     </style>
 </head>
@@ -765,7 +842,7 @@
         <div class="order-card">
             <div class="order-info">
                 <h2>How to Order • ช่องทางการสั่งซื้อ</h2>
-                <p>ทักแชทแจ้งชื่อรายวิชาที่ต้องการทาง Line ได้เลยค่ะ</p>
+                <p>ทักแชทแจ้งชื่อวิชาและรอบสอบ (Midterm / Final) ที่ต้องการทาง Line ได้เลยค่ะ</p>
                 
                 <div class="line-id-box">
                     <span style="font-size: 0.88rem; font-weight: 500;">Line ID: <strong>@451idafk</strong></span>
@@ -803,13 +880,29 @@
                 <!-- แถบสลับดูตัวอย่าง Midterm / Final -->
                 <div class="sample-tabs" id="sampleTabs"></div>
 
-                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน) -->
+                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน + ลายน้ำ & เบลอตรงกลาง) -->
                 <div class="vertical-preview-zone">
                     <button class="slide-nav-btn slide-prev" id="prevBtn" onclick="changePage(-1)">‹</button>
                     <div class="img-viewport" id="imgViewport">
                         <div class="pdf-loading" id="pdfLoading">กำลังโหลดหน้าชีท...</div>
-                        <canvas id="pdfCanvas" class="vertical-sample-media" onclick="toggleZoom()" style="display:none;"></canvas>
-                        <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-media" id="sampleImg" onclick="toggleZoom()" style="display:none;">
+                        <div class="sheet-stage" id="sheetStage" onclick="toggleZoom()" style="display:none;">
+                            <canvas id="pdfCanvas" class="vertical-sample-media" style="display:none;"></canvas>
+                            <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-media" id="sampleImg" style="display:none;">
+
+                            <!-- ลายน้ำจางๆ กระจายทั่วหน้า -->
+                            <div class="watermark-layer" aria-hidden="true">
+                                <div class="wm-row"><span>WAS.SHORTNOTE SAMPLE</span><span>WAS.SHORTNOTE SAMPLE</span></div>
+                                <div class="wm-row"><span>WAS.SHORTNOTE SAMPLE</span><span>WAS.SHORTNOTE SAMPLE</span></div>
+                                <div class="wm-row"><span>WAS.SHORTNOTE SAMPLE</span><span>WAS.SHORTNOTE SAMPLE</span></div>
+                                <div class="wm-row"><span>WAS.SHORTNOTE SAMPLE</span><span>WAS.SHORTNOTE SAMPLE</span></div>
+                            </div>
+
+                            <!-- แถบเบลอตรงกลางพร้อมข้อความป้องกันการคัดลอก -->
+                            <div class="center-blur-badge" aria-hidden="true">
+                                <div class="badge-main">WAS.SHORTNOTE SAMPLE</div>
+                                <div class="badge-sub">ตัวอย่างสรุปรายวิชา • ห้ามทำซ้ำหรือจำหน่าย</div>
+                            </div>
+                        </div>
                     </div>
                     <button class="slide-nav-btn slide-next" id="nextBtn" onclick="changePage(1)">›</button>
 
@@ -880,7 +973,7 @@
                         ],
                         weeks: [
                             {
-                                weekTitle: "หัวข้อเนื้อหาทั้งหมด",
+                                weekTitle: "หัวข้อเนื้อหาทั้งหมด 8 บท",
                                 topics: [
                                     "1) Information Literacy & DQ",
                                     "2) Information Sources & Library Services",
@@ -899,7 +992,7 @@
             {
                 titleTh: "สังคมและการเมือง",
                 titleEn: "Social and Politics",
-                profNote: "แยก Midterm & Final",
+                profNote: "แยกเล่ม Midterm & Final",
                 badgeText: "Mid 17 หน้า / Final 24 หน้า",
                 prices: [
                     { label: "Midterm", price: "35 ฿" },
@@ -1165,9 +1258,11 @@
             const currentGroup = notesData[activeIndex].sampleGroups[activeTabIndex];
             const files = currentGroup.sampleFiles || [];
             const loading = document.getElementById('pdfLoading');
+            const stage = document.getElementById('sheetStage');
             const canvas = document.getElementById('pdfCanvas');
             const img = document.getElementById('sampleImg');
 
+            stage.style.display = 'none';
             canvas.style.display = 'none';
             img.style.display = 'none';
             loading.innerText = "กำลังโหลดหน้าชีท...";
@@ -1202,6 +1297,7 @@
 
         async function renderCurrentSlide() {
             const slide = expandedSlides[activeSlideIndex];
+            const stage = document.getElementById('sheetStage');
             const canvas = document.getElementById('pdfCanvas');
             const img = document.getElementById('sampleImg');
             const loading = document.getElementById('pdfLoading');
@@ -1220,11 +1316,13 @@
 
                 await page.render({ canvasContext: ctx, viewport: viewport }).promise;
                 loading.style.display = 'none';
+                stage.style.display = 'inline-block';
             } else {
                 canvas.style.display = 'none';
                 loading.style.display = 'none';
                 img.style.display = 'block';
                 img.src = slide.url;
+                stage.style.display = 'inline-block';
             }
 
             updateToolbar();
