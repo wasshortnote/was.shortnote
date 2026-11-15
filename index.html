@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>was.shortnote | แหล่งรวมชีทสรุปและโน้ตเรียนน่ารักอ่านง่าย</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #FFFFFF;
+            --bg-pink: #F5EAE8;
+            --bg-cream: #FAF6F4;
+            --text-dark: #2C2827;
+            --text-muted: #7C6D68;
+            --accent-taupe: #9E8A84;
+            --accent-hover: #826F69;
+            --border-color: #EADCD9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Announcement Bar */
+        .top-bar {
+            background-color: var(--bg-pink);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--bg-main);
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-dark);
+        }
+
+        .cart-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .cart-btn:hover {
+            background-color: var(--bg-pink);
+        }
+
+        .cart-count {
+            background-color: var(--accent-taupe);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 7px;
+            border-radius: 10px;
+        }
+
+        /* Hero / Collection Banner */
+        .hero-banner {
+            background-color: var(--bg-pink);
+            padding: 50px 5%;
+            text-align: center;
+        }
+
+        .hero-banner h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .hero-banner p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            padding: 30px 5% 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-color);
+            padding: 7px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-taupe);
+            color: white;
+            border-color: var(--accent-taupe);
+        }
+
+        /* Product Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 5% 60px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 28px;
+        }
+
+        .product-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(158, 138, 132, 0.12);
+        }
+
+        .product-img-wrap {
+            position: relative;
+            background-color: var(--bg-cream);
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-taupe);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .product-info {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-cat {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .product-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            flex-grow: 1;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #B5A8A4;
+            font-size: 0.85rem;
+        }
+
+        .current-price {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--accent-taupe);
+            color: var(--text-dark);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: 0.2s;
+        }
+
+        .add-btn:hover {
+            background-color: var(--accent-taupe);
+            color: white;
+        }
+
+        /* How it works Section */
+        .how-it-works {
+            background-color: var(--bg-pink);
+            padding: 50px 5%;
+            text-align: center;
+        }
+
+        .how-it-works h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step-box {
+            background: rgba(255,255,255,0.6);
+            padding: 24px;
+            border-radius: 8px;
+        }
+
+        .step-box h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .step-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Promo Ticker */
+        .promo-ticker {
+            background-color: var(--text-dark);
+            color: var(--bg-pink);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-cream);
+            padding: 50px 5% 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .footer-col p, .footer-col a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Cart Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 40, 39, 0.5);
+            z-index: 200;
+            justify-content: flex-end;
+        }
+
+        .cart-drawer {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--bg-cream);
+            font-size: 0.9rem;
+        }
+
+        .remove-item {
+            color: #C87A7A;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .drawer-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-taupe);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        @media (max-width: 600px) {
+            .nav-links { display: none; }
+            .hero-banner h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        ✨ โปรโมชั่นพิเศษ! ซื้อครบ 2 วิชา แถมฟรีไฟล์แพลนเนอร์อ่านหนังสือ 1 เซต ✨
+    </div>
+
+    <header>
+        <a href="#" class="brand-logo">was.shortnote</a>
+        <ul class="nav-links">
+            <li><a href="#products">ชีทสรุปทั้งหมด</a></li>
+            <li><a href="#how">วิธีสั่งซื้อ</a></li>
+            <li><a href="#contact">ติดต่อร้าน</a></li>
+        </ul>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛍️ ตะกร้า <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </header>
+
+    <section class="hero-banner">
+        <h1>All Shortnotes & Planners</h1>
+        <p>ชีทสรุปเนื้อหาเข้าใจง่าย จัดหน้าสวยสบายตา พร้อมไฟล์ PDF คมชัด โหลดลง iPad หรือปริ้นอ่านได้ทันที</p>
+    </section>
+
+    <div class="filter-section" id="products">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">ทั้งหมด (6)</button>
+            <button class="filter-btn" onclick="filterProducts('general', this)">วิชาพื้นฐาน / ทั่วไป</button>
+            <button class="filter-btn" onclick="filterProducts('business', this)">บริหาร / เศรษฐศาสตร์</button>
+            <button class="filter-btn" onclick="filterProducts('planner', this)">แพลนเนอร์ & เทมเพลต</button>
+        </div>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">จัดส่งไฟล์อัตโนมัติผ่าน Google Drive</span>
+    </div>
+
+    <main class="container">
+        <div class="product-grid" id="productGrid">
+            <!-- สินค้าชิ้นที่ 1 -->
+            <div class="product-card" data-category="business">
+                <div class="product-img-wrap">
+                    <span class="badge">ขายดี</span>
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80" alt="ชีทสรุปหลักการตลาด">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">บริหาร / การตลาด</span>
+                    <h3 class="product-title">สรุป Principles of Marketing</h3>
+                    <p class="product-desc">สรุปครบทุกบท 4Ps, STP, Consumer Behavior พร้อม Mindmap ช่วยจำ (45 หน้า)</p>
+                    <div class="price-row">
+                        <span class="old-price">฿129</span>
+                        <span class="current-price">฿89</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('สรุป Principles of Marketing', 89)">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
+
+            <!-- สินค้าชิ้นที่ 2 -->
+            <div class="product-card" data-category="business">
+                <div class="product-img-wrap">
+                    <span class="badge">แนะนำ</span>
+                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=600&q=80" alt="ชีทสรุปเศรษฐศาสตร์">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">เศรษฐศาสตร์</span>
+                    <h3 class="product-title">สรุป Micro & Macro Economics</h3>
+                    <p class="product-desc">อธิบายกราฟ Demand-Supply, GDP, เงินเฟ้อ แบบเข้าใจง่าย ไม่ต้องท่องจำ (52 หน้า)</p>
+                    <div class="price-row">
+                        <span class="old-price">฿149</span>
+                        <span class="current-price">฿99</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('สรุป Micro & Macro Economics', 99)">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
+
+            <!-- สินค้าชิ้นที่ 3 -->
+            <div class="product-card" data-category="general">
+                <div class="product-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80" alt="ชีทสรุปภาษาอังกฤษ">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">ภาษาอังกฤษ</span>
+                    <h3 class="product-title">สรุป English Grammar & Tenses</h3>
+                    <p class="product-desc">รวมโครงสร้าง 12 Tenses, If-Clause และเทคนิคทำข้อสอบ Error Identification (38 หน้า)</p>
+                    <div class="price-row">
+                        <span class="current-price">฿79</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('สรุป English Grammar & Tenses', 79)">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
+
+            <!-- สินค้าชิ้นที่ 4 -->
+            <div class="product-card" data-category="general">
+                <div class="product-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80" alt="ชีทสรุปสถิติเบื้องต้น">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">คณิตศาสตร์ / สถิติ</span>
+                    <h3 class="product-title">สรุป Business Statistics ฉบับรวบรัด</h3>
+                    <p class="product-desc">รวมสูตรการแจกแจงความน่าจะเป็น การทดสอบสมมติฐาน พร้อมตัวอย่างโจทย์ (40 หน้า)</p>
+                    <div class="price-row">
+                        <span class="old-price">฿119</span>
+                        <span class="current-price">฿85</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('สรุป Business Statistics ฉบับรวบรัด', 85)">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
+
+            <!-- สินค้าชิ้นที่ 5 -->
+            <div class="product-card" data-category="planner">
+                <div class="product-img-wrap">
+                    <span class="badge">Digital</span>
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80" alt="Digital Study Planner">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">แพลนเนอร์</span>
+                    <h3 class="product-title">Minimal Pink Study Planner 2026</h3>
+                    <p class="product-desc">ไฟล์แพลนเนอร์สำหรับ GoodNotes / Notability มี Hyperlink กดข้ามหน้าได้ทันที</p>
+                    <div class="price-row">
+                        <span class="current-price">฿69</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Minimal Pink Study Planner 2026', 69)">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
+
+            <!-- สินค้าชิ้นที่ 6 -->
+            <div class="product-card" data-category="business">
+                <div class="product-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="สรุปบัญชีเบื้องต้น">
+                </div>
+                <div class="product-info">
+                    <span class="product-cat">การบัญชี</span>
+                    <h3 class="product-title">สรุป Financial Accounting เบื้องต้น</h3>
+                    <p class="product-desc">ปูพื้นฐานเดบิต-เครดิต การปิดบัญชี และงบการเงิน อ่านเข้าใจง่ายสำหรับมือใหม่</p>
+                    <div class="price-row">
+                        <span class="old-price">฿120</span>
+                        <span class="current-price">฿89</span>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('สรุป Financial Accounting เบื้องต้น', 89)">เพิ่มลงตะกร้า</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="how-it-works" id="how">
+        <h2>How It Works — ขั้นตอนการสั่งซื้อ</h2>
+        <div class="steps-grid">
+            <div class="step-box">
+                <h3>1. เลือกชีทสรุปที่ต้องการ</h3>
+                <p>กดเพิ่มชีทสรุปที่สนใจลงในตะกร้าสินค้า และตรวจสอบรายการสั่งซื้อ</p>
+            </div>
+            <div class="step-box">
+                <h3>2. ชำระเงินและแจ้งสลิป</h3>
+                <p>กดยืนยันคำสั่งซื้อเพื่อคัดลอกรายการ แล้วส่งแจ้งชำระเงินทาง Line หรือ IG ร้าน</p>
+            </div>
+            <div class="step-box">
+                <h3>3. รับลิงก์ดาวน์โหลดทันที</h3>
+                <p>รับลิงก์ Google Drive ไฟล์ PDF ความละเอียดสูง สามารถดาวน์โหลดเก็บไว้ได้ตลอดชีพ</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="promo-ticker">
+        WAS.SHORTNOTE • STUDY SMART NOT HARD • DIGITAL NOTES & PLANNERS • INSTANT ACCESS
+    </div>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="brand-logo" style="font-size: 1.5rem;">was.shortnote</a>
+                <p style="margin-top: 10px;">ตั้งใจสรุปทุกบทเรียนให้กระชับ อ่านง่าย และน่ารัก เพื่อเป็นตัวช่วยในทุกสนามสอบของคุณ</p>
+            </div>
+            <div class="footer-col">
+                <h4>หมวดหมู่สินค้า</h4>
+                <a href="#products">ชีทสรุปวิชาพื้นฐาน</a>
+                <a href="#products">ชีทสรุปบริหาร & เศรษฐศาสตร์</a>
+                <a href="#products">แพลนเนอร์ & เทมเพลต</a>
+            </div>
+            <div class="footer-col">
+                <h4>ช่องทางติดต่อ / แจ้งโอน</h4>
+                <p>Instagram: @was.shortnote</p>
+                <p>Line Official: @was.shortnote</p>
+                <p>เวลาทำการ: 09:00 - 22:00 น.</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 was.shortnote. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="modal-overlay" id="cartModal" onclick="if(event.target === this) toggleCart()">
+        <div class="cart-drawer">
+            <div class="drawer-header">
+                <h3>ตะกร้าสินค้าของคุณ</h3>
+                <button class="close-btn" onclick="toggleCart()">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <p style="color: var(--text-muted); text-align: center; margin-top: 40px;">ยังไม่มีสินค้าในตะกร้า</p>
+            </div>
+            <div class="drawer-footer">
+                <div class="total-row">
+                    <span>ยอดรวมทั้งหมด</span>
+                    <span id="cartTotal">฿0</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">คัดลอกรายการสั่งซื้อ & แจ้งโอน</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function filterProducts(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCartUI();
+            toggleCart(true);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cartCount');
+            const itemsEl = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+
+            countEl.innerText = cart.length;
+
+            if (cart.length === 0) {
+                itemsEl.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 40px;">ยังไม่มีสินค้าในตะกร้า</p>';
+                totalEl.innerText = '฿0';
+                return;
+            }
+
+            let total = 0;
+            itemsEl.innerHTML = cart.map((item, idx) => {
+                total += item.price;
+                return `
+                    <div class="cart-item">
+                        <div>
+                            <div style="font-weight: 500;">${item.name}</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem;">฿${item.price}</div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${idx})">ลบ</button>
+                    </div>
+                `;
+            }).join('');
+
+            totalEl.innerText = '฿' + total;
+        }
+
+        function toggleCart(forceOpen = false) {
+            const modal = document.getElementById('cartModal');
+            if (forceOpen) {
+                modal.style.display = 'flex';
+            } else {
+                modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('กรุณาเลือกสินค้าลงตะกร้าก่อนนะคะ');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const listText = cart.map((item, i) => `${i + 1}. ${item.name} (${item.price} บาท)`).join('\n');
+            const summary = `สวัสดีค่ะ สนใจสั่งซื้อชีทสรุปร้าน was.shortnote:\n${listText}\nยอดรวมทั้งหมด: ${total} บาท`;
+
+            navigator.clipboard.writeText(summary).then(() => {
+                alert('คัดลอกรายการสั่งซื้อเรียบร้อยแล้ว!\n\n' + summary + '\n\nสามารถนำไปวางส่งใน IG: @was.shortnote หรือ Line เพื่อชำระเงินได้เลยค่ะ');
+            }).catch(() => {
+                alert('รายการสั่งซื้อของคุณ:\n\n' + summary);
+            });
+        }
+    </script>
+</body>
+</html>
