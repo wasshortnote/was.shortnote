@@ -503,28 +503,23 @@
             height: auto;
         }
 
-        /* ชั้นลายน้ำจางๆ กระจายทั่วหน้าชีท */
+        /* ชั้นลายน้ำจางๆ กระจายแบบสับหว่างอย่างเป็นธรรมชาติ */
         .watermark-layer {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 12% 6%;
             overflow: hidden;
             z-index: 2;
         }
 
-        .wm-row {
-            display: flex;
-            justify-content: space-around;
-            transform: rotate(-22deg);
+        .wm-item {
+            position: absolute;
+            transform: translate(-50%, -50%) rotate(-24deg);
             white-space: nowrap;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 600;
-            letter-spacing: 1.8px;
-            color: rgba(44, 40, 39, 0.11);
+            letter-spacing: 2px;
+            color: rgba(44, 40, 39, 0.105);
         }
 
         /* ป้ายคาดตรงกลางพร้อมเบลอเนื้อหาด้านหลัง */
@@ -842,7 +837,7 @@
         <div class="order-card">
             <div class="order-info">
                 <h2>How to Order • ช่องทางการสั่งซื้อ</h2>
-                <p>ทักแชทแจ้งชื่อวิชาและรอบสอบ (Midterm / Final) ที่ต้องการทาง Line ได้เลยค่ะ</p>
+                <p>ทักแชทแจ้งชื่อรายวิชาที่ต้องการทาง Line ได้เลยค่ะ</p>
                 
                 <div class="line-id-box">
                     <span style="font-size: 0.88rem; font-weight: 500;">Line ID: <strong>@451idafk</strong></span>
@@ -880,7 +875,7 @@
                 <!-- แถบสลับดูตัวอย่าง Midterm / Final -->
                 <div class="sample-tabs" id="sampleTabs"></div>
 
-                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน + ลายน้ำ & เบลอตรงกลาง) -->
+                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน + ลายน้ำสับหว่าง & เบลอตรงกลาง) -->
                 <div class="vertical-preview-zone">
                     <button class="slide-nav-btn slide-prev" id="prevBtn" onclick="changePage(-1)">‹</button>
                     <div class="img-viewport" id="imgViewport">
@@ -889,12 +884,16 @@
                             <canvas id="pdfCanvas" class="vertical-sample-media" style="display:none;"></canvas>
                             <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-media" id="sampleImg" style="display:none;">
 
-                            <!-- ลายน้ำจางๆ กระจายทั่วหน้า (เฉพาะคำว่า was.shortnote) -->
+                            <!-- ลายน้ำแบบสับหว่าง (Staggered) กระจายอย่างเป็นธรรมชาติ -->
                             <div class="watermark-layer" aria-hidden="true">
-                                <div class="wm-row"><span>was.shortnote</span><span>was.shortnote</span><span>was.shortnote</span></div>
-                                <div class="wm-row"><span>was.shortnote</span><span>was.shortnote</span><span>was.shortnote</span></div>
-                                <div class="wm-row"><span>was.shortnote</span><span>was.shortnote</span><span>was.shortnote</span></div>
-                                <div class="wm-row"><span>was.shortnote</span><span>was.shortnote</span><span>was.shortnote</span></div>
+                                <span class="wm-item" style="top: 12%; left: 22%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 16%; left: 78%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 31%; left: 48%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 46%; left: 16%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 52%; left: 84%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 69%; left: 46%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 84%; left: 20%;">was.shortnote</span>
+                                <span class="wm-item" style="top: 88%; left: 76%;">was.shortnote</span>
                             </div>
 
                             <!-- แถบเบลอตรงกลางพร้อมข้อความป้องกันการคัดลอก -->
@@ -908,7 +907,7 @@
 
                     <div class="preview-toolbar">
                         <span class="tool-chip" id="pageText">หน้า 1 จาก 1</span>
-                        <button class="tool-chip zoom-trigger" id="zoomBtn" onclick="toggleZoom()">🔍 ซูมดูใกล้ๆ</button>
+                        <button class="tool-chip zoom-trigger" id="zoomBtn" onclick="toggleZoom()">🔍 กดเพื่อขยาย</button>
                     </div>
                 </div>
 
@@ -973,7 +972,7 @@
                         ],
                         weeks: [
                             {
-                                weekTitle: "หัวข้อเนื้อหาทั้งหมด 8 บท",
+                                weekTitle: "หัวข้อเนื้อหาทั้งหมด",
                                 topics: [
                                     "1) Information Literacy & DQ",
                                     "2) Information Sources & Library Services",
@@ -992,7 +991,7 @@
             {
                 titleTh: "สังคมและการเมือง",
                 titleEn: "Social and Politics",
-                profNote: "แยกเล่ม Midterm & Final",
+                profNote: "แยก Midterm & Final",
                 badgeText: "Mid 17 หน้า / Final 24 หน้า",
                 prices: [
                     { label: "Midterm", price: "35 ฿" },
@@ -1350,17 +1349,17 @@
 
             if (zoomed) {
                 viewport.classList.add('is-zoomed');
-                btn.innerText = '🔎 ย่อขนาดปกติ';
+                btn.innerText = '🔎 กดเพื่อย่อ';
             } else {
                 viewport.classList.remove('is-zoomed');
-                btn.innerText = '🔍 ซูมดูใกล้ๆ';
+                btn.innerText = '🔍 กดเพื่อขยาย';
             }
         }
 
         function resetZoom() {
             zoomed = false;
             document.getElementById('imgViewport').classList.remove('is-zoomed');
-            document.getElementById('zoomBtn').innerText = '🔍 ซูมดูใกล้ๆ';
+            document.getElementById('zoomBtn').innerText = '🔍 กดเพื่อขยาย';
         }
 
         function closeModal() {
