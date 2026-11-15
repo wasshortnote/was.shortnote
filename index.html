@@ -38,17 +38,6 @@
             line-height: 1.6;
         }
 
-        /* Top Announcement Bar */
-        .promo-strip {
-            background-color: var(--bg-blush);
-            color: var(--text-ink);
-            text-align: center;
-            font-size: 0.82rem;
-            padding: 8px 16px;
-            letter-spacing: 0.3px;
-            border-bottom: 1px solid var(--border-soft);
-        }
-
         /* Header */
         header {
             background-color: rgba(255, 255, 255, 0.95);
@@ -143,13 +132,6 @@
             color: var(--text-ink);
             font-weight: 600;
             letter-spacing: 0.2px;
-        }
-
-        .grade-a-banner span {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--text-taupe);
-            margin-top: 2px;
         }
 
         /* Product Grid */
@@ -478,13 +460,12 @@
             width: auto;
             max-width: 100%;
             max-height: 52vh;
-            aspect-ratio: 3 / 4;
             object-fit: contain;
             background: white;
             border-radius: 8px;
             box-shadow: 0 6px 20px rgba(44, 40, 39, 0.1);
             cursor: zoom-in;
-            transition: width 0.2s ease;
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .img-viewport.is-zoomed {
@@ -494,7 +475,7 @@
         .img-viewport.is-zoomed .vertical-sample-img {
             max-width: none;
             max-height: none;
-            width: 165%;
+            width: 180%;
             cursor: zoom-out;
         }
 
@@ -725,10 +706,6 @@
 </head>
 <body>
 
-    <div class="promo-strip">
-        ✨ ชีทสรุปอ่านง่าย กระชับ ตรงประเด็น • จัดส่งไฟล์ PDF ผ่าน Google Drive ทันทีหลังโอน ✨
-    </div>
-
     <header>
         <a href="#" class="brand-logo">was.shortnote</a>
         <a href="https://lin.ee/srOM5me" target="_blank" class="contact-pill">สั่งซื้อ / สอบถามทาง Line</a>
@@ -744,7 +721,6 @@
         <!-- ป้ายเน้นข้อความ -->
         <div class="grade-a-banner">
             <strong>🏆 สรุปจากคนที่ได้ A ทุกวิชา ⬇️</strong>
-            <span>คัดมาให้เฉพาะเนื้อหาสำคัญ เน้นจุดออกสอบ อ่านเข้าใจง่ายแม้พื้นฐานน้อย</span>
         </div>
 
         <div class="product-grid" id="productGrid"></div>
@@ -755,7 +731,7 @@
         <div class="order-card">
             <div class="order-info">
                 <h2>How to Order • ช่องทางการสั่งซื้อ</h2>
-                <p>ทักแชทแจ้งชื่อวิชาและรอบสอบ (Midterm / Final) ที่ต้องการทาง Line ได้เลย จัดส่งไฟล์ผ่าน Google Drive ทันทีหลังตรวจสอบยอดโอนค่ะ</p>
+                <p>ทักแชทแจ้งชื่อวิชาและรอบสอบ (Midterm / Final) ที่ต้องการทาง Line ได้เลยค่ะ</p>
                 
                 <div class="line-id-box">
                     <span style="font-size: 0.88rem; font-weight: 500;">Line ID: <strong>@451idafk</strong></span>
@@ -768,7 +744,6 @@
             </div>
 
             <div class="qr-box">
-                <!-- สร้าง QR Code จากลิงก์ https://lin.ee/srOM5me อัตโนมัติ (หรือเปลี่ยนเป็นชื่อไฟล์รูป QR ที่อัปโหลดใน GitHub ได้) -->
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=15a852&data=https://lin.ee/srOM5me" alt="QR Code Line @451idafk">
                 <span>สแกน QR Code เพื่อแอดไลน์</span>
             </div>
@@ -834,7 +809,7 @@
         const SHOP_LINE_URL = "https://lin.ee/srOM5me";
 
         // ==========================================
-        // 2. ข้อมูลรายวิชาทั้ง 3 วิชา (แยกช่องใส่รูป Midterm และ Final เรียบร้อย)
+        // 2. ข้อมูลรายวิชาทั้ง 3 วิชา
         // ==========================================
         const notesData = [
             {
