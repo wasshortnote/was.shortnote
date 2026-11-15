@@ -28,6 +28,10 @@
             font-family: 'Prompt', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-main);
             color: var(--text-ink);
@@ -39,9 +43,9 @@
             background-color: var(--bg-blush);
             color: var(--text-ink);
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             padding: 8px 16px;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
             border-bottom: 1px solid var(--border-soft);
         }
 
@@ -49,7 +53,7 @@
         header {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
-            padding: 18px 6%;
+            padding: 16px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -85,10 +89,10 @@
             border-color: var(--accent-rose);
         }
 
-        /* Hero Section (Editorial Style) */
+        /* Hero Section */
         .hero {
             background-color: var(--bg-cream);
-            padding: 52px 6% 48px;
+            padding: 46px 6% 42px;
             text-align: center;
             border-bottom: 1px solid var(--border-soft);
         }
@@ -98,12 +102,12 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-taupe);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.6rem;
+            font-size: 2.5rem;
             font-weight: 600;
             color: var(--text-ink);
             margin-bottom: 10px;
@@ -111,8 +115,8 @@
 
         .hero p {
             color: var(--text-taupe);
-            font-size: 0.92rem;
-            max-width: 540px;
+            font-size: 0.9rem;
+            max-width: 520px;
             margin: 0 auto;
         }
 
@@ -120,25 +124,39 @@
         .catalog-wrap {
             max-width: 960px;
             margin: 0 auto;
-            padding: 40px 5% 80px;
+            padding: 36px 5% 60px;
         }
 
-        .catalog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-soft);
-            font-size: 0.85rem;
+        /* Highlight Banner: สรุปจากคนที่ได้ A ทุกวิชา */
+        .grade-a-banner {
+            background: linear-gradient(135deg, var(--bg-blush) 0%, var(--bg-cream) 100%);
+            border: 1.5px solid var(--accent-rose);
+            border-radius: 14px;
+            padding: 14px 20px;
+            text-align: center;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 14px rgba(158, 138, 132, 0.1);
+        }
+
+        .grade-a-banner strong {
+            font-size: 1rem;
+            color: var(--text-ink);
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        .grade-a-banner span {
+            display: block;
+            font-size: 0.8rem;
             color: var(--text-taupe);
+            margin-top: 2px;
         }
 
-        /* Boutique Grid Layout (ต่างจาก uninote ที่เรียงแถวเดี่ยว) */
+        /* Product Grid */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
+            gap: 26px;
         }
 
         .product-card {
@@ -158,7 +176,7 @@
             border-color: var(--accent-rose);
         }
 
-        /* ภาพปกแนวตั้ง 3:4 สำหรับชีทสรุป */
+        /* ภาพปกแนวตั้ง 3:4 */
         .cover-frame {
             position: relative;
             width: 100%;
@@ -179,7 +197,7 @@
             transform: scale(1.03);
         }
 
-        .bundle-ribbon {
+        .top-badge {
             position: absolute;
             top: 12px;
             right: 12px;
@@ -207,15 +225,21 @@
         }
 
         .subject-th {
-            font-size: 1.08rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: var(--text-ink);
+            margin-bottom: 4px;
+        }
+
+        .subject-prof {
+            font-size: 0.8rem;
+            color: var(--accent-deep);
             margin-bottom: 14px;
         }
 
         .price-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 8px;
             margin-top: auto;
         }
@@ -224,11 +248,11 @@
             background-color: var(--bg-cream);
             border: 1px solid var(--border-soft);
             border-radius: 8px;
-            padding: 7px 10px;
+            padding: 7px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.82rem;
+            font-size: 0.83rem;
         }
 
         .price-box span:first-child {
@@ -240,7 +264,114 @@
             font-weight: 600;
         }
 
-        /* Product Detail Modal (Vertical Sample + Detailed Syllabus Below) */
+        /* How to Order & QR Section */
+        .order-section {
+            background-color: var(--bg-blush);
+            padding: 52px 5%;
+            border-top: 1px solid var(--border-soft);
+        }
+
+        .order-card {
+            max-width: 780px;
+            margin: 0 auto;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 18px;
+            padding: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 24px rgba(158, 138, 132, 0.08);
+        }
+
+        .order-info {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .order-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            color: var(--text-ink);
+            margin-bottom: 8px;
+        }
+
+        .order-info p {
+            font-size: 0.88rem;
+            color: var(--text-taupe);
+            margin-bottom: 18px;
+        }
+
+        .line-id-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-soft);
+            padding: 10px 14px;
+            border-radius: 10px;
+            max-width: 320px;
+            margin-bottom: 14px;
+        }
+
+        .copy-btn {
+            background-color: var(--accent-rose);
+            color: #FFFFFF;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-deep);
+        }
+
+        .direct-line-link {
+            display: inline-block;
+            background-color: var(--accent-rose);
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 24px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .direct-line-link:hover {
+            background-color: var(--accent-deep);
+        }
+
+        .qr-box {
+            text-align: center;
+            background-color: var(--bg-cream);
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border-soft);
+        }
+
+        .qr-box img {
+            width: 148px;
+            height: 148px;
+            display: block;
+            border-radius: 8px;
+            background: #FFFFFF;
+            padding: 4px;
+        }
+
+        .qr-box span {
+            display: block;
+            font-size: 0.76rem;
+            color: var(--text-taupe);
+            margin-top: 8px;
+        }
+
+        /* Product Detail Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -249,13 +380,13 @@
             z-index: 300;
             justify-content: center;
             align-items: center;
-            padding: 16px;
+            padding: 14px;
         }
 
         .modal-sheet {
             background-color: var(--bg-main);
             width: 100%;
-            max-width: 580px;
+            max-width: 600px;
             max-height: 92vh;
             border-radius: 18px;
             overflow: hidden;
@@ -287,19 +418,46 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
-        /* พื้นที่เลื่อนดูทั้งภาพตัวอย่างแนวตั้งและรายละเอียดด้านล่าง */
         .modal-scroll-body {
             overflow-y: auto;
             flex-grow: 1;
+        }
+
+        /* แถบสลับดูภาพตัวอย่าง Midterm / Final */
+        .sample-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 16px 0;
+            background-color: var(--bg-cream);
+        }
+
+        .sample-tab-btn {
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-soft);
+            background-color: #FFFFFF;
+            color: var(--text-taupe);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .sample-tab-btn.active {
+            background-color: var(--accent-rose);
+            color: #FFFFFF;
+            border-color: var(--accent-rose);
         }
 
         /* ส่วนแสดงภาพตัวอย่างชีทแนวตั้ง */
         .vertical-preview-zone {
             position: relative;
             background-color: var(--bg-cream);
-            padding: 22px 16px 14px;
+            padding: 16px 16px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -308,7 +466,7 @@
 
         .img-viewport {
             width: 100%;
-            max-height: 56vh;
+            max-height: 54vh;
             overflow: auto;
             display: flex;
             justify-content: center;
@@ -319,7 +477,7 @@
         .vertical-sample-img {
             width: auto;
             max-width: 100%;
-            max-height: 54vh;
+            max-height: 52vh;
             aspect-ratio: 3 / 4;
             object-fit: contain;
             background: white;
@@ -342,7 +500,7 @@
 
         .slide-nav-btn {
             position: absolute;
-            top: 44%;
+            top: 45%;
             transform: translateY(-50%);
             width: 36px;
             height: 36px;
@@ -362,7 +520,7 @@
         .preview-toolbar {
             display: flex;
             gap: 10px;
-            margin-top: 14px;
+            margin-top: 12px;
         }
 
         .tool-chip {
@@ -389,10 +547,10 @@
         }
 
         .syllabus-heading {
-            font-size: 0.95rem;
+            font-size: 0.96rem;
             font-weight: 600;
             color: var(--text-ink);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -402,40 +560,103 @@
             background-color: var(--bg-cream);
             border: 1px solid var(--border-soft);
             border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 12px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+        }
+
+        .topic-group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-soft);
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .topic-group-title {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--accent-deep);
-            margin-bottom: 6px;
+        }
+
+        .topic-group-price {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-soft);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-ink);
+        }
+
+        .highlight-box {
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            font-size: 0.83rem;
+            color: var(--text-ink);
+            border-left: 3px solid var(--accent-rose);
+        }
+
+        .highlight-box p {
+            margin-bottom: 4px;
+        }
+
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .week-block {
+            margin-bottom: 10px;
+        }
+
+        .week-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .week-title {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-ink);
+            margin-bottom: 4px;
         }
 
         .topic-list {
             list-style: none;
-            font-size: 0.84rem;
+            font-size: 0.83rem;
             color: var(--text-ink);
         }
 
         .topic-list li {
-            padding-left: 14px;
+            padding-left: 16px;
             position: relative;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
+            line-height: 1.5;
         }
 
         .topic-list li::before {
-            content: "•";
+            content: "→";
             position: absolute;
             left: 0;
             color: var(--accent-rose);
+            font-size: 0.8rem;
         }
 
-        .file-spec-note {
-            font-size: 0.8rem;
+        .sub-list {
+            list-style: none;
+            padding-left: 16px;
+            margin-top: 2px;
+            margin-bottom: 4px;
             color: var(--text-taupe);
-            margin-top: 8px;
+            font-size: 0.81rem;
+        }
+
+        .sub-list li::before {
+            content: "•";
+            color: var(--text-taupe);
         }
 
         /* Modal Sticky Bottom Bar */
@@ -451,13 +672,12 @@
         }
 
         .bottom-prices {
-            font-size: 0.86rem;
+            font-size: 0.88rem;
         }
 
-        .bottom-prices .bundle-highlight {
-            color: var(--tag-bundle-text);
-            font-weight: 600;
-            font-size: 0.8rem;
+        .bottom-prices .sub-note {
+            color: var(--text-taupe);
+            font-size: 0.78rem;
         }
 
         .line-cta-btn {
@@ -480,7 +700,7 @@
             background-color: var(--bg-cream);
             border-top: 1px solid var(--border-soft);
             text-align: center;
-            padding: 28px 5%;
+            padding: 24px 5%;
             font-size: 0.82rem;
             color: var(--text-taupe);
         }
@@ -493,40 +713,73 @@
             .hero h1 {
                 font-size: 2.1rem;
             }
+            .order-card {
+                justify-content: center;
+                text-align: center;
+            }
+            .line-id-box {
+                margin: 0 auto 14px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="promo-strip">
-        ✨ ซื้อครบเซต Midterm + Final รับราคาพิเศษทุกวิชา • จัดส่งไฟล์ PDF ผ่าน Google Drive ทันที ✨
+        ✨ ชีทสรุปอ่านง่าย กระชับ ตรงประเด็น • จัดส่งไฟล์ PDF ผ่าน Google Drive ทันทีหลังโอน ✨
     </div>
 
     <header>
         <a href="#" class="brand-logo">was.shortnote</a>
-        <a href="https://lin.ee/9L1Qqvu" target="_blank" class="contact-pill">สั่งซื้อ / สอบถามทาง Line</a>
+        <a href="https://lin.ee/srOM5me" target="_blank" class="contact-pill">สั่งซื้อ / สอบถามทาง Line</a>
     </header>
 
     <section class="hero">
         <div class="hero-eyebrow">Digital Study Notes</div>
         <h1>Shortnote Collection</h1>
-        <p>สรุปเนื้อหากระชับ ตรงประเด็น เน้นจุดที่มีแนวโน้มออกสอบ กดที่แต่ละวิชาเพื่อดูตัวอย่างหน้าชีทและหัวข้อเนื้อหาทั้งหมดด้านใน</p>
+        <p>กดที่การ์ดแต่ละวิชาเพื่อดูตัวอย่างหน้าชีท และรายละเอียดหัวข้อเนื้อหาทั้งหมดด้านใน</p>
     </section>
 
     <main class="catalog-wrap">
-        <div class="catalog-meta">
-            <span>รายวิชาที่เปิดจำหน่าย</span>
-            <span>คลิกที่การ์ดวิชาเพื่อดูตัวอย่างและหัวข้อเนื้อหา</span>
+        <!-- ป้ายเน้นข้อความ -->
+        <div class="grade-a-banner">
+            <strong>🏆 สรุปจากคนที่ได้ A ทุกวิชา ⬇️</strong>
+            <span>คัดมาให้เฉพาะเนื้อหาสำคัญ เน้นจุดออกสอบ อ่านเข้าใจง่ายแม้พื้นฐานน้อย</span>
         </div>
 
         <div class="product-grid" id="productGrid"></div>
     </main>
 
+    <!-- ช่องทางสั่งซื้อ & QR Code Line -->
+    <section class="order-section" id="contact">
+        <div class="order-card">
+            <div class="order-info">
+                <h2>How to Order • ช่องทางการสั่งซื้อ</h2>
+                <p>ทักแชทแจ้งชื่อวิชาและรอบสอบ (Midterm / Final) ที่ต้องการทาง Line ได้เลย จัดส่งไฟล์ผ่าน Google Drive ทันทีหลังตรวจสอบยอดโอนค่ะ</p>
+                
+                <div class="line-id-box">
+                    <span style="font-size: 0.88rem; font-weight: 500;">Line ID: <strong>@451idafk</strong></span>
+                    <button class="copy-btn" onclick="copyLineId()">คัดลอก ID</button>
+                </div>
+
+                <a href="https://lin.ee/srOM5me" target="_blank" class="direct-line-link">
+                    💬 คลิกเพื่อทักแชท Line ร้าน
+                </a>
+            </div>
+
+            <div class="qr-box">
+                <!-- สร้าง QR Code จากลิงก์ https://lin.ee/srOM5me อัตโนมัติ (หรือเปลี่ยนเป็นชื่อไฟล์รูป QR ที่อัปโหลดใน GitHub ได้) -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=15a852&data=https://lin.ee/srOM5me" alt="QR Code Line @451idafk">
+                <span>สแกน QR Code เพื่อแอดไลน์</span>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        © 2026 was.shortnote • All rights reserved.
+        © 2026 was.shortnote • Line Official: @451idafk
     </footer>
 
-    <!-- Modal รายละเอียดสินค้า (ภาพตัวอย่างแนวตั้ง + รายละเอียดหัวข้อด้านล่าง) -->
+    <!-- Modal รายละเอียดสินค้า -->
     <div class="modal-overlay" id="productModal" onclick="if(event.target === this) closeModal()">
         <div class="modal-sheet">
             <div class="modal-top-bar">
@@ -538,6 +791,9 @@
             </div>
 
             <div class="modal-scroll-body">
+                <!-- แถบสลับดูรูปตัวอย่าง Midterm / Final -->
+                <div class="sample-tabs" id="sampleTabs"></div>
+
                 <!-- ภาพตัวอย่างแนวตั้ง -->
                 <div class="vertical-preview-zone">
                     <button class="slide-nav-btn slide-prev" id="prevBtn" onclick="changePage(-1)">‹</button>
@@ -547,35 +803,24 @@
                     <button class="slide-nav-btn slide-next" id="nextBtn" onclick="changePage(1)">›</button>
 
                     <div class="preview-toolbar">
-                        <span class="tool-chip" id="pageText">หน้า 1 จาก 2</span>
+                        <span class="tool-chip" id="pageText">หน้า 1 จาก 1</span>
                         <button class="tool-chip zoom-trigger" id="zoomBtn" onclick="toggleZoom()">🔍 ซูมดูใกล้ๆ</button>
                     </div>
                 </div>
 
-                <!-- รายละเอียดหัวข้อในชีท (อยู่ด้านล่างภาพ) -->
+                <!-- รายละเอียดหัวข้อเนื้อหาด้านล่างภาพ -->
                 <div class="syllabus-section">
-                    <div class="syllabus-heading">📑 รายละเอียดหัวข้อเนื้อหาในชีท</div>
-                    
-                    <div class="topic-group">
-                        <div class="topic-group-title" id="midHeader">ส่วนที่ 1: เนื้อหา Midterm</div>
-                        <ul class="topic-list" id="midTopics"></ul>
-                    </div>
-
-                    <div class="topic-group">
-                        <div class="topic-group-title" id="finalHeader">ส่วนที่ 2: เนื้อหา Final</div>
-                        <ul class="topic-list" id="finalTopics"></ul>
-                    </div>
-
-                    <div class="file-spec-note" id="fileSpec"></div>
+                    <div class="syllabus-heading">📑 รายละเอียดเนื้อหาภายในชีท</div>
+                    <div id="syllabusContainer"></div>
                 </div>
             </div>
 
             <div class="modal-bottom-bar">
                 <div class="bottom-prices">
-                    <div id="bottomPriceLine"><strong>Mid 49 ฿</strong> • <strong>Final 55 ฿</strong></div>
-                    <div class="bundle-highlight" id="bottomBundleLine">ซื้อคู่เพียง 95 ฿</div>
+                    <div id="bottomPriceLine"></div>
+                    <div class="sub-note" id="bottomSubNote">Line ID: @451idafk</div>
                 </div>
-                <a href="#" target="_blank" class="line-cta-btn" id="lineOrderBtn">
+                <a href="https://lin.ee/srOM5me" target="_blank" class="line-cta-btn" id="lineOrderBtn">
                     ทักแชทสั่งซื้อทาง Line
                 </a>
             </div>
@@ -584,140 +829,232 @@
 
     <script>
         // ==========================================
-        // 1. ใส่ลิงก์ Line ของร้านตรงนี้
+        // 1. ลิงก์ Line ของร้าน
         // ==========================================
-        const SHOP_LINE_URL = "https://lin.ee/9L1Qqvu";
+        const SHOP_LINE_URL = "https://lin.ee/srOM5me";
 
         // ==========================================
-        // 2. ข้อมูลรายวิชา ราคา รูปตัวอย่างแนวตั้ง และหัวข้อเนื้อหา
+        // 2. ข้อมูลรายวิชาทั้ง 3 วิชา (แยกช่องใส่รูป Midterm และ Final เรียบร้อย)
         // ==========================================
         const notesData = [
             {
-                titleTh: "เศรษฐศาสตร์จุลภาค",
+                titleTh: "ทรัพยากรสารสนเทศเพื่อการค้นคว้า",
+                titleEn: "Information Resources for Research",
+                profNote: "เนื้อหารวม Mid + Final (สอบครั้งเดียว)",
+                badgeText: "รวม Mid+Final • 21 หน้า",
+                coverImg: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=750&h=1000&q=85",
+                prices: [
+                    { label: "Mid + Final (ไฟล์เดียวจบ)", price: "35 ฿" }
+                ],
+                sampleGroups: [
+                    {
+                        tabName: "ตัวอย่างชีท (Mid + Final)",
+                        images: [
+                            "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=750&h=1000&q=85"
+                        ]
+                    }
+                ],
+                sections: [
+                    {
+                        title: "📑 เนื้อหา Mid + Final (ทั้งหมด 21 หน้า)",
+                        priceTag: "35 ฿",
+                        highlights: [
+                            "เนื้อหาละเอียด ครบถ้วน 19 หน้า มีเน้นจุดที่ต้องจำ ⭐️ และจุดที่มีแนวโน้มออกสอบ ✳️",
+                            "สรุปเนื้อหาครบจบภายใน 2 หน้า ไว้อ่านทวนก่อนเข้าสอบได้เลย!",
+                            "🎁 แถมฟรีอีก 2 หน้า : แนวข้อสอบ, Checklist เนื้อหา, รวม Quiz 🔍"
+                        ],
+                        weeks: [
+                            {
+                                weekTitle: "หัวข้อเนื้อหาทั้งหมด 8 บท",
+                                topics: [
+                                    "1) Information Literacy & DQ",
+                                    "2) Information Sources & Library Services",
+                                    "3) Search Statement",
+                                    "4) AI สำหรับงานวิจัย และการประเมินสารสนเทศ",
+                                    "5) การคัดลอกผลงานทางวิชาการ (Plagiarism)",
+                                    "6) Database Service",
+                                    "7) Reference and Plagiarism",
+                                    "8) Ethics and Report"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                titleTh: "สังคมและการเมือง",
+                titleEn: "Social and Politics",
+                profNote: "แยกเล่ม Midterm & Final",
+                badgeText: "Mid 17 หน้า / Final 24 หน้า",
+                coverImg: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=750&h=1000&q=85",
+                prices: [
+                    { label: "Midterm", price: "35 ฿" },
+                    { label: "Final", price: "35 ฿" }
+                ],
+                sampleGroups: [
+                    {
+                        tabName: "ตัวอย่าง Midterm",
+                        images: [
+                            "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=750&h=1000&q=85"
+                        ]
+                    },
+                    {
+                        tabName: "ตัวอย่าง Final",
+                        images: [
+                            "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=750&h=1000&q=85"
+                        ]
+                    }
+                ],
+                sections: [
+                    {
+                        title: "📘 ส่วนที่ 1 : เนื้อหา Midterm (17 หน้า)",
+                        priceTag: "35 ฿",
+                        highlights: [],
+                        weeks: [
+                            {
+                                weekTitle: "Week 1-2 :",
+                                topics: [
+                                    "ความสำคัญทางสังคมและการเมือง",
+                                    "คำที่เกี่ยวข้องกับการเปลี่ยนแปลงและการพัฒนา",
+                                    "คุณสมบัติของสังกัปการพัฒนา (Concept)",
+                                    "วิกฤตการณ์แห่งการพัฒนา",
+                                    "การเปลี่ยนแปลงในบริบทของการพัฒนา",
+                                    "หลักการพื้นฐาน การปรับโครงสร้างเศรษฐกิจและสังคม",
+                                    "ยุทธศาสตร์การปรับโครงสร้างเศรษฐกิจและสังคม",
+                                    "กรอบทิศทางการพัฒนาประเทศในระยะ 10-15 ปีข้างหน้า"
+                                ]
+                            },
+                            {
+                                weekTitle: "Week 3-4 :",
+                                topics: [
+                                    "พื้นฐานความคิดทางการเมืองและการปกครอง",
+                                    "คุณธรรมทางการเมือง",
+                                    "คุณลักษณะสำคัญของนักการเมืองที่ดี",
+                                    {
+                                        text: "สังคม",
+                                        sub: [
+                                            "เหตุผลมนุษย์อยู่รวมกันเป็นสังคม",
+                                            "ความหมายของสังคม",
+                                            "หน้าที่ของสังคม",
+                                            "เงื่อนไขการสลายตัวของสังคม"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                weekTitle: "Week 5-6 :",
+                                topics: [
+                                    "ประเภทสังคม",
+                                    "โครงสร้างทางสังคม",
+                                    "โครงสร้างลักษณะสังคมไทย",
+                                    "โครงสร้างสังคมไทยในปัจจุบัน",
+                                    "ลักษณะเด่นและลักษณะด้อยสังคมไทยในปัจจุบัน"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title: "📙 ส่วนที่ 2 : เนื้อหา Final (24 หน้า)",
+                        priceTag: "35 ฿",
+                        highlights: [],
+                        weeks: [
+                            {
+                                weekTitle: "หัวข้อเนื้อหา Final ทั้งหมด",
+                                topics: [
+                                    "อุดมการณ์ทางการเมือง (Political Ideology)",
+                                    "ลัทธิการเมือง",
+                                    "ระบบการเมืองของไทย",
+                                    "การพัฒนาทางการเมือง",
+                                    "วัฒนธรรมทางการเมือง",
+                                    "การมีส่วนร่วมทางการเมือง",
+                                    "การเมืองกับวิถีประชา : โลกตะวันตก"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                titleTh: "เศรษฐศาสตร์จุลภาค (อ.จุฑามาศ)",
                 titleEn: "Microeconomics",
-                midPrice: "49 ฿",
-                finalPrice: "55 ฿",
-                bundlePrice: "95 ฿",
-                // รูปปกและภาพตัวอย่างแนวตั้ง (สามารถใส่ได้หลายหน้า)
-                samples: [
-                    "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=750&h=1000&q=85",
-                    "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=750&h=1000&q=85"
+                profNote: "เฉพาะเนื้อหา Final (ไม่มีมิดเทอม)",
+                badgeText: "Final 11 หน้า",
+                coverImg: "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=750&h=1000&q=85",
+                prices: [
+                    { label: "Final", price: "35 ฿" }
                 ],
-                midTopics: [
-                    "บทที่ 1: พื้นฐานเศรษฐศาสตร์และเส้นความเป็นไปได้ในการผลิต (PPC)",
-                    "บทที่ 2: อุปสงค์ อุปทาน และดุลยภาพตลาด",
-                    "บทที่ 3: ความยืดหยุ่นของอุปสงค์และอุปทาน (Elasticity)",
-                    "บทที่ 4: ทฤษฎีพฤติกรรมผู้บริโภค (Utility & Indifference Curve)"
+                sampleGroups: [
+                    {
+                        tabName: "ตัวอย่าง Final",
+                        images: [
+                            "https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=750&h=1000&q=85"
+                        ]
+                    }
                 ],
-                finalTopics: [
-                    "บทที่ 5: ทฤษฎีการผลิตและต้นทุนการผลิตระยะสั้น-ระยะยาว",
-                    "บทที่ 6: ตลาดแข่งขันสมบูรณ์ (Perfect Competition)",
-                    "บทที่ 7: ตลาดผูกขาด (Monopoly) และตลาดกึ่งแข่งขันกึ่งผูกขาด",
-                    "บทที่ 8: ตลาดผู้ขายน้อยราย (Oligopoly) และทฤษฎีเกมเบื้องต้น"
-                ],
-                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง (Midterm 28 หน้า / Final 32 หน้า)"
-            },
-            {
-                titleTh: "เศรษฐศาสตร์มหภาค",
-                titleEn: "Macroeconomics",
-                midPrice: "45 ฿",
-                finalPrice: "49 ฿",
-                bundlePrice: "85 ฿",
-                samples: [
-                    "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=750&h=1000&q=85",
-                    "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=750&h=1000&q=85"
-                ],
-                midTopics: [
-                    "บทที่ 1: รายได้ประชาชาติและการคำนวณ GDP / GNP",
-                    "บทที่ 2: การบริโภค การออม และการลงทุน",
-                    "บทที่ 3: ดุลยภาพรายได้ประชาชาติและตัวทวี (Multiplier)"
-                ],
-                finalTopics: [
-                    "บทที่ 4: เงินเฟ้อ เงินฝืด และการว่างงาน",
-                    "บทที่ 5: นโยบายการเงินและธนาคารกลาง (Monetary Policy)",
-                    "บทที่ 6: นโยบายการคลังและงบประมาณแผ่นดิน (Fiscal Policy)",
-                    "บทที่ 7: การค้าระหว่างประเทศและอัตราแลกเปลี่ยน"
-                ],
-                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง (Midterm 24 หน้า / Final 26 หน้า)"
-            },
-            {
-                titleTh: "คณิตศาสตร์ธุรกิจ",
-                titleEn: "Math for Business",
-                midPrice: "39 ฿",
-                finalPrice: "45 ฿",
-                bundlePrice: "75 ฿",
-                samples: [
-                    "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=750&h=1000&q=85"
-                ],
-                midTopics: [
-                    "บทที่ 1: ฟังก์ชันเชิงเส้นและสมการเส้นตรงทางธุรกิจ",
-                    "บทที่ 2: จุดคุ้มทุน (Break-Even Point) และฟังก์ชันกำไร",
-                    "บทที่ 3: เมทริกซ์และการแก้ระบบสมการเชิงเส้น"
-                ],
-                finalTopics: [
-                    "บทที่ 4: ลิมิตและความต่อเนื่องของฟังก์ชัน",
-                    "บทที่ 5: อนุพันธ์ (Differentiation) และการหาค่าสูงสุด-ต่ำสุด",
-                    "บทที่ 6: คณิตศาสตร์การเงิน ดอกเบี้ยทบต้น และมูลค่าปัจจุบัน"
-                ],
-                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง รวมสูตรลัดและตัวอย่างโจทย์ทีละขั้น"
-            },
-            {
-                titleTh: "หลักการตลาด",
-                titleEn: "Principles of Marketing",
-                midPrice: "49 ฿",
-                finalPrice: "49 ฿",
-                bundlePrice: "89 ฿",
-                samples: [
-                    "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=750&h=1000&q=85"
-                ],
-                midTopics: [
-                    "บทที่ 1: แนวคิดหลักทางการตลาดและกระบวนการสร้างคุณค่า",
-                    "บทที่ 2: การวิเคราะห์สภาพแวดล้อมทางการตลาด (SWOT / PESTEL)",
-                    "บทที่ 3: พฤติกรรมผู้บริโภคและกระบวนการตัดสินใจซื้อ",
-                    "บทที่ 4: การแบ่งส่วนตลาด การเลือกกลุ่มเป้าหมาย และการวางตำแหน่ง (STP)"
-                ],
-                finalTopics: [
-                    "บทที่ 5: กลยุทธ์ผลิตภัณฑ์และการสร้างแบรนด์ (Product & Branding)",
-                    "บทที่ 6: กลยุทธ์การตั้งราคา (Pricing Strategies)",
-                    "บทที่ 7: ช่องทางการจัดจำหน่าย (Place & Supply Chain)",
-                    "บทที่ 8: การสื่อสารการตลาดแบบบูรณาการ (Promotion & IMC)"
-                ],
-                fileInfo: "ไฟล์ PDF สีคมชัด ขนาด A4 แนวตั้ง สรุปเป็นตารางและ Mindmap จำง่าย"
+                sections: [
+                    {
+                        title: "📙 เนื้อหา Final (11 หน้า)",
+                        priceTag: "35 ฿",
+                        highlights: [
+                            "เนื้อหาละเอียด ครบถ้วน อ่านจบภายใน 10 หน้า + 1 หน้าสรุปรายละเอียด",
+                            "❗️ เน้นแนวข้อสอบ & จุดที่ต้องจำให้ครบถ้วน"
+                        ],
+                        weeks: [
+                            {
+                                weekTitle: "ประกอบด้วยเนื้อหา Week 8 - 14",
+                                topics: [
+                                    "Week 8 : พฤติกรรมผู้บริโภค",
+                                    "Week 9+10 : การผลิตและต้นทุน",
+                                    "Week 11 : ตลาดแข่งขันสมบูรณ์",
+                                    "Week 12 : ตลาดผูกขาด",
+                                    "Week 13 : ตลาดกึ่งแข่งขัน",
+                                    "Week 14 : ตลาดผู้ขายน้อยราย"
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
         ];
 
         let activeIndex = 0;
+        let activeTabIndex = 0;
         let activePage = 0;
         let zoomed = false;
 
         function renderCatalog() {
             const grid = document.getElementById('productGrid');
-            grid.innerHTML = notesData.map((item, idx) => `
-                <article class="product-card" onclick="openProduct(${idx})">
-                    <div class="cover-frame">
-                        <span class="bundle-ribbon">ซื้อคู่ ${item.bundlePrice}</span>
-                        <img src="${item.samples[0]}" alt="${item.titleTh}">
+            grid.innerHTML = notesData.map((item, idx) => {
+                const badgeHtml = item.badgeText ? `<span class="top-badge">${item.badgeText}</span>` : '';
+                const priceBoxesHtml = item.prices.map(p => `
+                    <div class="price-box">
+                        <span>${p.label}</span>
+                        <strong>${p.price}</strong>
                     </div>
-                    <div class="card-content">
-                        <div class="subject-en">${item.titleEn}</div>
-                        <h2 class="subject-th">${item.titleTh}</h2>
-                        <div class="price-grid">
-                            <div class="price-box">
-                                <span>Midterm</span>
-                                <strong>${item.midPrice}</strong>
-                            </div>
-                            <div class="price-box">
-                                <span>Final</span>
-                                <strong>${item.finalPrice}</strong>
+                `).join('');
+
+                return `
+                    <article class="product-card" onclick="openProduct(${idx})">
+                        <div class="cover-frame">
+                            ${badgeHtml}
+                            <img src="${item.coverImg}" alt="${item.titleTh}">
+                        </div>
+                        <div class="card-content">
+                            <div class="subject-en">${item.titleEn}</div>
+                            <h2 class="subject-th">${item.titleTh}</h2>
+                            <div class="subject-prof">${item.profNote}</div>
+                            <div class="price-grid">
+                                ${priceBoxesHtml}
                             </div>
                         </div>
-                    </div>
-                </article>
-            `).join('');
+                    </article>
+                `;
+            }).join('');
         }
 
         function openProduct(idx) {
             activeIndex = idx;
+            activeTabIndex = 0;
             activePage = 0;
             resetZoom();
 
@@ -725,29 +1062,81 @@
             document.getElementById('modalEn').innerText = item.titleEn;
             document.getElementById('modalTh').innerText = item.titleTh;
 
-            // เติมหัวข้อเนื้อหา Midterm และ Final ด้านล่างภาพ
-            document.getElementById('midHeader').innerText = `ส่วนที่ 1: เนื้อหา Midterm (${item.midPrice})`;
-            document.getElementById('midTopics').innerHTML = item.midTopics.map(t => `<li>${t}</li>`).join('');
+            renderSampleTabs();
+            updatePreviewImage();
 
-            document.getElementById('finalHeader').innerText = `ส่วนที่ 2: เนื้อหา Final (${item.finalPrice})`;
-            document.getElementById('finalTopics').innerHTML = item.finalTopics.map(t => `<li>${t}</li>`).join('');
+            const syllabusContainer = document.getElementById('syllabusContainer');
+            syllabusContainer.innerHTML = item.sections.map(sec => {
+                const highlightsHtml = (sec.highlights && sec.highlights.length > 0)
+                    ? `<div class="highlight-box">${sec.highlights.map(h => `<p>${h}</p>`).join('')}</div>`
+                    : '';
 
-            document.getElementById('fileSpec').innerText = `📌 ${item.fileInfo}`;
+                const weeksHtml = sec.weeks.map(w => {
+                    const topicsListHtml = w.topics.map(t => {
+                        if (typeof t === 'string') {
+                            return `<li>${t}</li>`;
+                        } else {
+                            const subHtml = t.sub.map(s => `<li>${s}</li>`).join('');
+                            return `<li>${t.text}<ul class="sub-list">${subHtml}</ul></li>`;
+                        }
+                    }).join('');
 
-            // ราคาและปุ่มลิงก์ไป Line
-            document.getElementById('bottomPriceLine').innerHTML = `<strong>Midterm ${item.midPrice}</strong> • <strong>Final ${item.finalPrice}</strong>`;
-            document.getElementById('bottomBundleLine').innerText = `⭐ ซื้อคู่เพียง ${item.bundlePrice}`;
+                    return `
+                        <div class="week-block">
+                            <div class="week-title">${w.weekTitle}</div>
+                            <ul class="topic-list">${topicsListHtml}</ul>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="topic-group">
+                        <div class="topic-group-header">
+                            <span class="topic-group-title">${sec.title}</span>
+                            <span class="topic-group-price">${sec.priceTag}</span>
+                        </div>
+                        ${highlightsHtml}
+                        ${weeksHtml}
+                    </div>
+                `;
+            }).join('');
+
+            const priceSummary = item.prices.map(p => `${p.label} ${p.price}`).join(' • ');
+            document.getElementById('bottomPriceLine').innerHTML = `<strong>${priceSummary}</strong>`;
             document.getElementById('lineOrderBtn').href = SHOP_LINE_URL;
 
-            updatePreviewImage();
             document.getElementById('productModal').style.display = 'flex';
             document.querySelector('.modal-scroll-body').scrollTop = 0;
         }
 
+        function renderSampleTabs() {
+            const item = notesData[activeIndex];
+            const tabsEl = document.getElementById('sampleTabs');
+            if (item.sampleGroups.length <= 1) {
+                tabsEl.innerHTML = `<span class="tool-chip" style="background:#FFF; color:var(--text-taupe);">${item.sampleGroups[0].tabName}</span>`;
+                return;
+            }
+            tabsEl.innerHTML = item.sampleGroups.map((grp, tIdx) => `
+                <button class="sample-tab-btn ${tIdx === activeTabIndex ? 'active' : ''}" onclick="switchSampleTab(${tIdx})">
+                    ${grp.tabName}
+                </button>
+            `).join('');
+        }
+
+        function switchSampleTab(tIdx) {
+            activeTabIndex = tIdx;
+            activePage = 0;
+            resetZoom();
+            renderSampleTabs();
+            updatePreviewImage();
+        }
+
         function updatePreviewImage() {
             const item = notesData[activeIndex];
-            const total = item.samples.length;
-            document.getElementById('sampleImg').src = item.samples[activePage];
+            const currentGroup = item.sampleGroups[activeTabIndex];
+            const total = currentGroup.images.length;
+
+            document.getElementById('sampleImg').src = currentGroup.images[activePage];
             document.getElementById('pageText').innerText = `หน้า ${activePage + 1} จาก ${total}`;
 
             document.getElementById('prevBtn').style.display = total > 1 ? 'block' : 'none';
@@ -756,7 +1145,7 @@
 
         function changePage(dir) {
             resetZoom();
-            const total = notesData[activeIndex].samples.length;
+            const total = notesData[activeIndex].sampleGroups[activeTabIndex].images.length;
             activePage = (activePage + dir + total) % total;
             updatePreviewImage();
         }
@@ -784,6 +1173,12 @@
         function closeModal() {
             document.getElementById('productModal').style.display = 'none';
             resetZoom();
+        }
+
+        function copyLineId() {
+            navigator.clipboard.writeText('@451idafk').then(() => {
+                alert('คัดลอก Line ID: @451idafk เรียบร้อยแล้วค่ะ');
+            });
         }
 
         renderCatalog();
