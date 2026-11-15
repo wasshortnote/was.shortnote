@@ -522,7 +522,7 @@
             color: rgba(44, 40, 39, 0.105);
         }
 
-        /* ป้ายคาดตรงกลางพร้อมเบลอเนื้อหาด้านหลัง (แบบที่ 3: กรอบเส้นบาง + ตราประทับวงกลม W) */
+        /* ป้ายคาดตรงกลางพร้อมตราประทับวงกลม W */
         .center-blur-badge {
             position: absolute;
             top: 50%;
@@ -897,7 +897,7 @@
                 <!-- แถบสลับดูตัวอย่าง Midterm / Final -->
                 <div class="sample-tabs" id="sampleTabs"></div>
 
-                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน + ลายน้ำสับหว่าง & เบลอตรงกลาง) -->
+                <!-- ส่วนแสดงตัวอย่างหน้าชีท (รองรับ PDF + รูปภาพผสมกัน + ซ่อนลายน้ำเฉพาะหน้ารีวิว) -->
                 <div class="vertical-preview-zone">
                     <button class="slide-nav-btn slide-prev" id="prevBtn" onclick="changePage(-1)">‹</button>
                     <div class="img-viewport" id="imgViewport">
@@ -906,8 +906,8 @@
                             <canvas id="pdfCanvas" class="vertical-sample-media" style="display:none;"></canvas>
                             <img src="" alt="ตัวอย่างชีทแนวตั้ง" class="vertical-sample-media" id="sampleImg" style="display:none;">
 
-                            <!-- ลายน้ำแบบสับหว่าง (Staggered) กระจายอย่างเป็นธรรมชาติ -->
-                            <div class="watermark-layer" aria-hidden="true">
+                            <!-- ลายน้ำแบบสับหว่าง (แสดงเฉพาะหน้าสรุป) -->
+                            <div class="watermark-layer" id="watermarkLayer" aria-hidden="true">
                                 <span class="wm-item" style="top: 12%; left: 22%;">was.shortnote</span>
                                 <span class="wm-item" style="top: 16%; left: 78%;">was.shortnote</span>
                                 <span class="wm-item" style="top: 31%; left: 48%;">was.shortnote</span>
@@ -918,8 +918,8 @@
                                 <span class="wm-item" style="top: 88%; left: 76%;">was.shortnote</span>
                             </div>
 
-                            <!-- แถบเบลอตรงกลางพร้อมตราประทับวงกลม W -->
-                            <div class="center-blur-badge" aria-hidden="true">
+                            <!-- ป้ายคาดตรงกลางพร้อมตราประทับวงกลม W (แสดงเฉพาะหน้าสรุป) -->
+                            <div class="center-blur-badge" id="blurBadge" aria-hidden="true">
                                 <div class="monogram-seal">W</div>
                                 <div class="badge-main">WAS.SHORTNOTE SAMPLE</div>
                                 <div class="badge-sub">ตัวอย่างสรุปรายวิชา • ห้ามทำซ้ำหรือจำหน่าย</div>
@@ -963,9 +963,6 @@
 
         // ==========================================
         // 2. ข้อมูลรายวิชาทั้ง 3 วิชา
-        // วิธีใส่ตัวอย่างชีท (sampleFiles):
-        // ใส่ชื่อไฟล์ ".pdf" และ/หรือไฟล์รูปภาพ ".png" / ".jpg" ที่อัปโหลดขึ้น GitHub ลงใน sampleFiles ได้เลย
-        // เช่น sampleFiles: ["micro-sample.pdf", "micro-pic.png"]
         // ==========================================
         const notesData = [
             {
@@ -1117,7 +1114,8 @@
                         sampleFiles: [
                             "micro-final-sample1.pdf",
                             "micro-final-sample2.jpeg",
-                            "micro-final-sample3.pdf"
+                            "micro-final-sample3.pdf",
+                            "review-final-micro.jpeg"
                         ]
                     }
                 ],
@@ -1295,17 +1293,18 @@
             expandedSlides = [];
 
             for (const fileUrl of files) {
+                const isRev = fileUrl.toLowerCase().includes('review');
                 if (isPdf(fileUrl)) {
                     try {
                         const pdf = await loadPdfDocument(fileUrl);
                         for (let p = 1; p <= pdf.numPages; p++) {
-                            expandedSlides.push({ type: 'pdf', pdfDoc: pdf, pageNum: p });
+                            expandedSlides.push({ type: 'pdf', pdfDoc: pdf, pageNum: p, isReview: isRev });
                         }
                     } catch (e) {
                         console.error("โหลด PDF ไม่สำเร็จ:", fileUrl, e);
                     }
                 } else {
-                    expandedSlides.push({ type: 'image', url: fileUrl });
+                    expandedSlides.push({ type: 'image', url: fileUrl, isReview: isRev });
                 }
             }
 
@@ -1325,6 +1324,17 @@
             const canvas = document.getElementById('pdfCanvas');
             const img = document.getElementById('sampleImg');
             const loading = document.getElementById('pdfLoading');
+            const watermarkLayer = document.getElementById('watermarkLayer');
+            const blurBadge = document.getElementById('blurBadge');
+
+            // ตรวจสอบว่าถ้าเป็นหน้ารีวิว ให้ซ่อนลายน้ำและป้ายเบลอ
+            if (slide.isReview) {
+                watermarkLayer.style.display = 'none';
+                blurBadge.style.display = 'none';
+            } else {
+                watermarkLayer.style.display = 'block';
+                blurBadge.style.display = 'block';
+            }
 
             if (slide.type === 'pdf') {
                 img.style.display = 'none';
