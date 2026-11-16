@@ -1350,7 +1350,7 @@
                 loading.style.display = 'block';
 
                 const page = await slide.pdfDoc.getPage(slide.pageNum);
-                const viewport = page.getViewport({ scale: 2.5 });
+                const viewport = page.getViewport({ scale: 2.0 }); // ปรับลด scale เหลือ 2.0 เพื่อเพิ่มความเร็วในการโหลด
                 const ctx = canvas.getContext('2d');
 
                 canvas.width = viewport.width;
